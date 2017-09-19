@@ -1,0 +1,2 @@
+# MEAN_Coding_Dojo
+A collection of my practice, assignments, and projects from Coding Dojo with full MEAN, its individual parts, and JavaScript. This repository was made to gather/organize all my MEAN related work, since it was in a shared class repo. I've also added on to several projects with comments and I've added several word docs in order to cover the basics, further my understanding, and in case i'm ever rusty and need a refresher.
