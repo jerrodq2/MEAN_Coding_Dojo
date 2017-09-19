@@ -1,0 +1,75 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+
+    SLL.prototype.hasLoop = function(){
+      if(!this.head){
+        return false;
+      }
+      var arr = [];
+      var current = this.head;
+      while(current){
+        for (var i = 0; i<arr.length; i++){
+          if (current.val == arr[i]){
+            return true;
+          }
+        }
+        arr.push(current.val);
+        current = current.next;
+      }
+      return false;
+    }
+
+    SLL.prototype.startLoop = function(){
+      if(!this.head){
+        return null;
+      }
+      var arr = [];
+      var current = this.head;
+      while(current){
+        for (var i = 0; i<arr.length; i++){
+          if (current.val == arr[i]){
+            return current;
+          }
+        }
+        arr.push(current.val);
+        current = current.next;
+      }
+      return null;
+    }
+
+    SLL.prototype.startLoop = function(){
+      if(!this.head){
+        return null;
+      }
+      var current = this.head;
+      var arr = [current];
+      while(current){
+        for (var i = 0; i<arr.length; i++){
+          if (current.next.val == arr[i]){
+            current.next = null;
+            return this;
+          }
+        }
+        arr.push(current.next.val);
+        current = current.next;
+      }
+      return null;
+    }
+
+  });
+
+
+  $(function(){
+    // or here, pick one.
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>

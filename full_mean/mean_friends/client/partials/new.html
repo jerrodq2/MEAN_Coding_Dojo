@@ -1,0 +1,9 @@
+<div ng-controller='friendsControl as fc'>
+  <form>
+    First Name: <input type="text" ng-model='fc.newFriend.name'>
+    Age: <input type="number" ng-model='fc.newFriend.age'>
+    Birthday: <input type="date" ng-model='fc.newFriend.dob'>
+    <input type="submit" ng-click='fc.create()' value="Create">
+  </form>
+  <h4><a href="#/">Home</a></h4>
+</div>

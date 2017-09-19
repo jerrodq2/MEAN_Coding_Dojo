@@ -1,0 +1,19 @@
+<div ng-controller='userController as uc'>
+  <h1>Register</h1>
+  {{uc.flash}}
+  <form name='reg'>
+    Username:<input type="text" ng-model='uc.user.username'>
+    Email: <input type="email" ng-model='uc.user.email'>
+    Password: <input type="password" ng-model='uc.user.password'>
+    Confirmation Password: <input type="password" ng-model='uc.user.confirm'>
+    <input type="submit" ng-click='uc.register()' value="Register">
+  </form>
+  <hr>
+  <h1>Login</h1>
+  {{uc.secondFlash}}
+  <form>
+    Username: <input type="text" ng-model='uc.checkUser.username'>
+    Password: <input type="password" ng-model='uc.checkUser.password'>
+    <input type="submit" ng-click='uc.login()' value="Login">
+  </form>
+</div>

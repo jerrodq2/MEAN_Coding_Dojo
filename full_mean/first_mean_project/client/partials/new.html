@@ -1,0 +1,24 @@
+<div ng-controller=" newController as nc">
+  <h1>Create Friends!</h1>
+  <form ng-submit="nc.create()">
+    <div>
+      <label>Enter your friend's name!</label>
+      <input ng-model="nc.newFriend.name" />
+    </div>
+
+    <div>
+      <label>Enter your friend's age!</label>
+      <input type='number' ng-model="nc.newFriend.age" />
+    </div>
+
+    <input type="submit" value="Create Friend">
+  </form>
+  <ul>
+    <li ng-repeat='user in nc.all'>Name: {{user.name}}, Age:{{user.age}}</li>
+  </ul>
+  <form>
+    <input type="date" ng-model='nc.date'>
+    <input type="submit" ng-click='nc.eh()' value="Click">
+  </form>
+  {{nc.test | date:'MM-dd'}}
+</div>

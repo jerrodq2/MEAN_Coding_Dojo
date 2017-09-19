@@ -1,0 +1,24 @@
+<div ng-controller='productController as pc'>
+  <h3><a href="#/dashboard">Dashboard</a> | Products | <a href="#/orders">Orders</a> | <a href="#/customers">Customers</a></h3>
+  <h3>Add a new Product</h3>
+  {{pc.flash}}
+  <form>
+    Name: <input type="text" ng-model='pc.newProduct.name'>
+    Image(url): <input type="text" ng-model='pc.newProduct.imgUrl'>
+    Description: <input type="text" ng-model='pc.newProduct.description'>
+    Initial Quantity: <input type="number" ng-model='pc.newProduct.initial_quantity'>
+    <input type="submit" ng-click='pc.create()' value="Create">
+  </form>
+  <ul ng-repeat='prod in pc.products' ng-show='pc.products.length > 0'>
+    <li>
+      <img ng-src='{{prod.imgUrl}}' alt="Image" />
+      <p>
+        {{prod.name}}
+      </p>
+      <p>
+        ({{prod.current_quantity}} left)
+      </p>
+      <button ng-click='pc.delete(prod._id)'> Delete</button>
+    </li>
+  </ul>
+</div>

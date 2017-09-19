@@ -1,0 +1,20 @@
+<div ng-controller='messageController as mc'>
+  <h1>Message Board</h1><h6><a href="#/" ng-click='mc.logout()'>Logout</a></h6>
+  {{mc.flash}}
+  <form>
+    Post a message: <textarea ng-model='mc.newM.message' rows="8" cols="40"></textarea>
+    <input type="submit" ng-click='mc.create()' value="Post a message">
+  </form>
+  <div ng-repeat='message in mc.messages'>
+    <h3>{{message.username}} - {{message.date | date: "MM/dd/yyyy 'at' h:mma"}}:</h3>
+    <p>{{message.message}}</p>
+    <ul ng-repeat='comment in message._comments'>
+      <li>{{comment.username}} - {{comment.date | date: "MM/dd/yyyy 'at' h:mma"}}: <p>{{comment.comment}}</p></li>
+    </ul>
+    <form>
+      Post a Comment: <input type="text" ng-model='newComment'>
+      <input type="submit" ng-click="mc.add(message._id, newComment); newComment ='' " value="Post a Comment">
+    </form>
+    <hr>
+  </div>
+</div>

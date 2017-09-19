@@ -1,0 +1,10 @@
+<div ng-controller='showControl as sc'>
+  <h1>Edit {{sc.friend.name}}</h1>
+  <form>
+    Name: <input type="text" ng-model='sc.user.name' value="">
+    Age: <input type="number" ng-model='sc.user.age' value="">
+    Date of Birth: <input type="date" ng-model='sc.user.dob' value="">
+    <input type="submit" ng-click='sc.update(sc.friend._id)' value="Submit">
+  </form>
+  <h4><a href="#/">Home</a> | <a href="#/show/{{sc.friend._id}}">Show User</a> | <a href="#/" ng-click='sc.delete(sc.friend._id)'>Delete</a> | <a href="#/new">Add User</a></h4>
+</div>

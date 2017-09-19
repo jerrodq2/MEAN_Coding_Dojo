@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src = 'bower_components/angular/angular.js'></script>
+    <script type="text/javascript">
+      var app = angular.module('myApp', []);
+      app.factory('fact', function(){
+        var factory = {};
+        var products = [
+          {name: 'mouse', price: 59.99},
+          {name: 'computer', price: 100},
+          {name: 'car', price: 10000}
+        ]
+        factory.addProduct = function(data){
+          products.push(data);
+        }
+        factory.delete = function(index){
+          products.splice(index, 1);
+        }
+        factory.index = function(callback){
+          callback(products);
+        }
+        return factory;
+      })
+      app.controller('control', ['fact', function(fact){
+        this.products = [];
+        this.test = 'hi'
+        var self = this
+        fact.index(function(data){
+          self.products = data;
+        })
+        this.add = function(){
+          fact.addProduct(self.newP);
+        }
+        this.delete = function(index){
+          fact.delete(index);
+        }
+      }])
+    </script>
+  </head>
+  <body>
+    <div ng-controller='control as c'>
+      <form>
+        Product Name: <input type="text" ng-model='c.newP.name'>
+        Product Price: <input type="number" ng-model='c.newP.price'>
+        <input type="submit" ng-click='c.add()' value="Add Product">
+      </form>
+      <table>
+        <tr>
+          <th>Name</th><th>Price</th><th>Actions</th>
+        </tr>
+        <tr ng-repeat='product in c.products'>
+          <td>{{ product.name}}</td>
+          <td>${{ product.price}}</td>
+          <td><button ng-click='c.delete($index)'>Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

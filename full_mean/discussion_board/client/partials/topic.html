@@ -1,0 +1,23 @@
+<div ng-controller='topicController as tC'>
+  <h4><a href="#/main">Dashboard</a> | <a ng-controller='mainController as mC' href="#/" ng-click='mC.logout()'>Logout</a></h4>
+  <h5><a href="#/user/{{tC.topic.userId}}">{{tC.topic.username}}</a> posted a topic: </h5>
+  <p>{{tC.topic.topic}}</p><p><i>{{tC.topic.description}}</i></p>
+  <h1>Post your message here</h1>
+  {{tC.flashM}}
+  <form>
+    <textarea ng-model='tC.message' rows="8" cols="40"></textarea>
+    <input type="submit" ng-click='tC.addMessage()' value="Post Message">
+  </form>
+  <hr>
+  <div ng-repeat='message in tC.topic.messages'>
+    <h3><a href="#/user/{{message.userId}}">{{message.username}}</a>: {{message.message}}</h3>
+    <ul ng-repeat='comment in message.comments'>
+      <li><a href="#/user/{{comment.userId}}">{{comment.username}}</a>: {{comment.comment}}</li>
+    </ul>
+    {{tC.flashC}}
+    <form>
+      <input type="text" ng-model='comment'>
+      <input type="submit" ng-click="tC.addComment(message._id, comment); comment =''" value="Comment">
+    </form>
+  </div>
+</div>

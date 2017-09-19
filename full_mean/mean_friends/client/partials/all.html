@@ -1,0 +1,14 @@
+<div ng-controller='friendsControl as fc'>
+  <table>
+    <tr>
+      <th>Name</th><th>Age</th><th>Show</th><th>Update</th><th>Delete</th>
+    </tr>
+    <tr ng-repeat='friend in fc.friends'>
+      <td>{{friend.name}}</td><td>{{friend.age}}</td>
+      <td><a href="#/show/{{friend._id}}">Show</a></td>
+      <td><a href="#/edit/{{friend._id}}">Edit</a></td>
+      <td><button ng-click='fc.delete(friend._id)'>Delete</button></td>
+    </tr>
+  </table>
+  <h4><a href="#/new">New Friend</a></h4>
+</div>

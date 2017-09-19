@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+      <script src = 'bower_components/angular/angular.js'></script>
+    <script type='text/javascript'>
+      var myAppModule = angular.module('myApp', []);
+
+      myAppModule.controller('divController', function ($scope){
+          $scope.name= 'Jerrod';
+          $scope.favLanguage = 'Python';
+          $scope.favFramework = 'Pylot';
+          $scope.show = function(){
+            console.log('Hi, my name is '+$scope.name+', and my favorite language is '+$scope.favLanguage+', because my favorite framework is '+$scope.favFramework)
+          }
+      });
+      </script>
+    </head>
+  <body>
+    <div ng-controller='divController'>
+      <h1>press the button</h1>
+      <h2>{{ name }}</h2>
+      <input type="submit" name="name" ng-click='show()' value="Button">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src ='angular-cookies/angular-cookies.js'></script>
+    <!-- End Bower Components -->
+    <script type="text/javascript">
+      var app = angular.module('myApp', ['ngCookies'])
+      app.factory('registrationFactory', ['$http', function($http){
+            var factory = {};
+            factory.reg = function(user, callback) {
+              $http.post('/', user).then(function(response){
+                console.log(response.data)
+                callback(response.data.message)
+              })
+            }
+            factory.login= function(user, callback){
+              $http.post('/login', user).then(function(response){
+                if(response.data.message){
+                  callback(true)
+                } else {
+                  callback(false)
+                  console.log('not great')
+                }
+              })
+            }
+        return factory
+      }])
+
+      app.controller('registrationController', ['$scope', '$cookies','registrationFactory', function($scope, cookie, registrationFactory){
+        $scope.message = ''
+        $scope.success = ''
+        console.log(cookie.get('test'))
+        console.log('END TEST ********')
+        $scope.reg =function(){
+          registrationFactory.reg($scope.user, function(response){
+            $scope.message = response
+          })
+        }
+        $scope.login=function(){
+          registrationFactory.login($scope.check, function(result){
+            if(result){
+              $scope.success = 'logged in'
+              cookie.put('test', 'great job')
+            } else {
+              $scope.success = 'Invalid email or password'
+            }
+          })
+        }
+      }])
+    </script>
+
+  </head>
+  <body ng-controller='registrationController'>
+    <form >
+      First Name: <input type="text" name="name" ng-model='user.name'>
+      email: <input type="email" name="name" ng-model='user.email'>
+      Password: <input type="password" name="name" ng-model='user.password'>
+      <input type="submit" ng-click='reg()' value="Submit">
+    </form>
+    {{message}}
+      <hr>
+      <form>
+        Email: <input type="email" name="name" ng-model='check.email'>
+        Password: <input type="password" ng-model='check.password'>
+        <input type="submit" ng-click='login()' value="Login">
+      </form>
+      {{success}}
+  </body>
+</html>

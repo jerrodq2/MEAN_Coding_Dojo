@@ -1,0 +1,28 @@
+<div ng-controller='editAppointmentController as ac'>
+  <h1>Current Appointment Information</h1>
+  <h2>Date: {{ac.one.date | date:"MM/dd/yyyy"}}</h2>
+  <h2>Time: {{ac.one.time}}</h2>
+  <h4>Complain: {{ac.one.complain}}</h4>
+  <hr>
+  <h1>New Info</h1>
+  <p>Please fill out all fields</p>
+  {{ac.updateFlash}}
+  <form>
+    Date: <input type="date" ng-model='ac.newInfo.date'>
+    time: <select ng-model='ac.newInfo.time'>
+      <option value="8:00 AM">8:00 AM</option>
+      <option value="9:00 AM">9:00 AM</option>
+      <option value="10:00 AM">10:00 AM</option>
+      <option value="11:00 AM">11:00 AM</option>
+      <option value="12:00 PM">12:00 PM</option>
+      <option value="1:00 PM">1:00 PM</option>
+      <option value="2:00 PM">2:00 PM</option>
+      <option value="3:00 PM">3:00 PM</option>
+      <option value="4:00 PM">4:00 PM</option>
+      <option value="5:00 PM">5:00 PM</option>
+    </select>
+    Complain: <textarea ng-model='ac.newInfo.complain' rows="8" cols="40"></textarea>
+    <input type="Submit" ng-click='ac.update(ac.one._id)' value="Edit Appointment">
+  </form>
+  <a href="#/main">Cancel</a>
+</div>

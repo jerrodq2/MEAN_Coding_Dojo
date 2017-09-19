@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <h1>All Rabbits</h1>
+      <table>
+        <tr>
+          <th>name</th>
+          <th>Age</th>
+          <th>Color</th>
+          <th>Actions</th>
+        </tr>
+        <% for (var i = 0; i < rabbits.length; i++){ %>
+          <tr>
+            <td><%= rabbits[i].name %></td>
+            <td><%= rabbits[i].age %></td>
+            <td><%= rabbits[i].color %></td>
+            <td>
+              <a href="/mongooses/<%= rabbits[i]._id %>">Show</a> |
+              <a href="/mongooses/<%= rabbits[i]._id %>/edit">Edit</a> |
+              <a href="/mongooses/<%= rabbits[i]._id %>/destroy">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </table>
+      <h3><a href="/mongooses/new">Add Rabbit</a></h3>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<div ng-controller='customerController as cc'>
+  <h3><a href="#/dashboard">Dashboard</a> | <a href="#/products">Products</a> | <a href="#/orders">Orders</a> | Customers</h3>
+  <h3>Add a new customer</h3>
+  {{cc.flash}}
+  <form>
+    Customer Name: <input type="text" ng-model='cc.newCustomer.name'>
+    <input type="submit" ng-click='cc.create()' value="Add">
+  </form>
+  <input type="text" ng-model='search' placeholder="Search Name">
+  <table>
+    <tr>
+      <th>Customer Name</th><th>Created date</th><th>Actions</th>
+    </tr>
+    <tr ng-show='cc.customers.length < 1'>
+      <td> - </td><td> - </td><td> - </td>
+    </tr>
+    <tr ng-repeat='customer in cc.customers | filter: search'>
+      <td>{{customer.name}}</td><td>{{customer.createdAt}}</td><td><button ng-click='cc.delete(customer._id)'>Remove</button></td>
+    </tr>
+  </table>
+</div>

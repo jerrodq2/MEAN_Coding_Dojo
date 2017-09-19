@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+
+    // Not the prettiest code, look below it for details. This is from Strings part 2, pg. 111 in our book.
+    function dedupe(str){
+      var newStr = '';
+      var indexHolder = [];
+      for (var i = str.length-1; i >= 0; i--){
+        var count = 0;
+        var check = 0;
+        for(var y = 0; y<indexHolder.length; y++){
+          if(i == indexHolder[y])
+            check ++;
+        }
+        if(check == 0){
+          for (var x = 0; x < str.length; x++){
+            if(str[i] == str[x]){
+              count++;
+              if(count > 1)
+                indexHolder.push(x)
+            }
+          }
+          newStr += str[i];
+
+        }
+      }
+      var answer = '';
+      for (var i = newStr.length -1; i >= 0; i--){
+        answer += newStr[i];
+      }
+      return answer;
+    }
+    console.log(dedupe('Snaps! crackles! pops!'))
+
+    // Sorry this isn't the prettiest or most efficient, I tried to think of a different way of doing this but I couldn't think of a way that works and is simplified. Basically, the first for loop iterates through the given string(str) in reverse, this way, it makes it easier to capture the last instance of that character. The third for loop also iterates through the str, so that I can compare the string to itself, and I use the count to increase any time I find the same character, if it's more than one, the charcter is not unique. The character is always added to the newStr. The key and most confusing part to look at in this function, is the indexHolder. Basically, after count is increased to one, every time after that, I push i, or the index of the repeating character into indexHolder. So that at the start of the big for loop, if i, or the iteration it's on, matches any numbers in indexHolder, then, that index is a repeating character and I can just skip it. Not sure if this is efficient computing wise, but it makes it easier so that I don't have tell which instances get added to newStr. The last part just reverses newStr, couldn't think of an easier way of doing this and adding the string in the correct order.
+
+  });
+
+
+  $(function(){
+    // or here, pick one.
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>

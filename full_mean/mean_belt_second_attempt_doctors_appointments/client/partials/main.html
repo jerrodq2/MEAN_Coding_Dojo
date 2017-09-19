@@ -1,0 +1,26 @@
+<div ng-controller = 'mainAppointmentController as mac'>
+  <h5><a href="#/welcome" ng-click='mac.logout()'>Logout</a></h5>
+  <h1>Doctor's Appointments</h1>
+  <h4>Search: <input type="text" ng-model='search'></h4>
+  <table>
+    <tr>
+      <th>Date</th><th>Time</th><th>Patient Name</th><th>Complain</th><th>Actions</th>
+    </tr>
+    <tr ng-show='mac.apps.length <1'>
+      <td> - </td>
+      <td> - </td>
+      <td> - </td>
+      <td> - </td>
+      <td> - </td>
+    </tr>
+    <tr ng-repeat='app in mac.apps | orderBy: "date" : reverse=true | filter: search' ng-if='mac.futureDate(app.date)'>
+      <td>{{app.date | date : 'MM/dd/yyyy'}}</td>
+      <td>{{app.time}}</td>
+      <td>{{app.patient_name}}</td>
+      <td>{{app.complain}}</td>
+      <td ng-show='app.userId == mac.id'> <button ng-click='mac.delete(app._id)'>Delete</button> | <a href="#/edit/{{app._id}}">Edit</a></td>
+      <td ng-show='app.userId != mac.id'> - </td>
+    </tr>
+  </table>
+  <h3><a href="#/create">Add New Appointment</a></h3>
+</div>

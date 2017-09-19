@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app='controller_app'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src = 'bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('controller_app', []);
+    myApp.controller('control', function($scope){
+      $scope.foodList = [];
+      $scope.addFood = function(){
+        $scope.foodList.push($scope.food);
+        $scope.food = ''
+      }
+    })
+  </script>
+  </head>
+  <body>
+    <div ng-controller='control'>
+      <input type="text" ng-model='example'>
+      <h3>What are you thinking?</h3>
+      <h1 ng-show='example'>{{example}}</h1>
+      <h3 ng-hide='example' class='ng-hide'>Are you thinking anything?</h3>
+      <form>
+        Favorite Food: <input type="text" ng-model='food'>
+        <input type="submit" name="Add Food" ng-click='addFood()'>
+        <!-- ng-submit is similarly used as ng-click, if I wanted to use it, i would take away ng-click in the last input and put ng-submit='addFood()' in the form tag -->
+      </form>
+      <h3 ng-if='foodList.length > 0'>Favorite Foods List:</h3>
+      <ul>
+        <li ng-repeat='food in foodList'>{{ food }}</li>
+      </ul>
+    </div>
+  </body>
+</html>

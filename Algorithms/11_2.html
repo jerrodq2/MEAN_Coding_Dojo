@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+    SLL.prototype.shiftRight(num){
+      if (!this.head){
+        return null;
+      } else if (!this.head.next){
+        return this;
+      }
+      var length = 0;
+      var count = this.head;
+      while(count){
+        length ++;
+        count = count.next;
+      }
+      function (rotate){
+        var current = this.head;
+        while(current.next.next){
+          current = current.next;
+        }
+        var temp = current.next;
+        current.next = null;
+        temp.next = this.head;
+        this.head = temp;
+      }
+      // end function
+      if (num > length){
+        var mod = num%length;
+      }
+      var mod = length;
+      for (var i = 0; i < mod; i++){
+        rotate();
+      }
+      return this;
+    }
+
+    function setupLoop(length, link){
+      var list = new SLL;
+      var current = list.head;
+      var holder;
+      for (var i = 1; i <= length; i++){
+        var temp = new Node(i);
+        current = temp;
+        current = current.next;
+        if (i == link){
+          holder = temp;
+        }
+      }
+      current = holder;
+      return this;
+    }
+
+  });
+
+
+  $(function(){
+    // or here, pick one.
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>

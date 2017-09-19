@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+      <!-- These two lines are for jquery and sockets -->
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            var socket = io.connect();
+              // the line above is necessary to use sockets
+            $('button').click(function (){
+              socket.emit("button_clicked");
+                // so when the tag button is clicked, it sends/'emits' a socket named button_clicked, and on the server side, it listens for that specific name.
+            });
+            socket.on('server_response', function (count){
+              var x = document.getElementById('x')
+              x.innerHTML = count
+                // This is a listener, it listens for an emit sent by the socket named 'server_response', when it gets it, the html tag with an id of 'x' is changed to equal count. There are other ways I could have done this. I could have also done:    $('h1').html('The button has been clicked '+count+' number of time(s)')
+            });
+            $('#reset').click(function(){
+              socket.emit('reset');
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <style media="screen">
+      body{
+        padding-top: 100px;
+      }
+      button{
+        height: 100px;
+      }
+      #reset{
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="col-xs-12 col-xs-offset-2">The button has been pushed <span id="x"></span> time(s)</h1>
+      <h3 class="col-xs-6 col-xs-offset-3">Push the button to update the count!</h3>
+      <button class="btn btn-primary col-xs-6 col-xs-offset-3">Push the epic button</button>
+      <button id='reset' class="btn btn-danger" name="button">Reset Count</button>
+    </div>
+  </body>
+</html>

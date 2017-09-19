@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Edit</h1>
+    <form class="" action="/mongooses/<%= rabbit.id%>" method="post">
+      Name: <input type="text" name="name" value="<%= rabbit.name%>">
+      Age: <input type="text" name="age" value="<%= rabbit.age%>">
+      Color: <input type="text" name="color" value="<%= rabbit.color%>">
+      <input type="submit" name="submit" value="Submit">
+      <p>
+        <a href="/">Home</a> |
+        <a href="/mongooses/<%= rabbit.id%>/destroy">Delete</a>
+      </p>
+    </form>
+  </body>
+</html>

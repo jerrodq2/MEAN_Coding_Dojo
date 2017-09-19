@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script src = 'angular-cookies/angular-cookies.js'></script>
+    <script src = 'angular-messages/angular-messages.js'></script>
+    <!-- End Bower Components -->
+    <script src="app.js" charset="utf-8"></script>
+    <script src='./factories/userFactory.js' charset="utf-8"></script>
+    <script src='./factories/messageFactory.js' charset="utf-8"></script>
+    <script src="./controllers/userController.js" charset="utf-8"></script>
+    <script src="./controllers/messageController.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div ng-view="">
+    </div>
+  </body>
+</html>
