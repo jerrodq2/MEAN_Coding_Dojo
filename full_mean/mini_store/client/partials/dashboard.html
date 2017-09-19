@@ -1,0 +1,44 @@
+<div ng-controller='orderController as oc'>
+  <h3>Dashboard | <a href="#/products">Products</a> | <a href="#/orders">Orders</a> | <a href="#/customers">Customers</a></h3>
+  <h1>Products</h1>
+  <ul ng-repeat='prod in oc.products' ng-show='$index <=1'>
+    <li>
+      <img ng-src='{{prod.imgUrl}}' alt="Image" />
+      <p>
+        {{prod.name}}
+      </p>
+      <p>
+        ({{prod.current_quantity}} left)
+      </p>
+      <button ng-click='pc.delete(prod._id)'> Delete</button>
+    </li>
+  </ul>
+  <a href="#/products">See all Products</a>
+  <hr>
+  <h1>Most Recent users</h1>
+  <table>
+    <tr>
+      <th>Customer Name</th><th>Created date</th><th>Actions</th>
+    </tr>
+    <tr ng-show='oc.customers.length < 1'>
+      <td> - </td><td> - </td><td> - </td>
+    </tr>
+    <tr ng-repeat='customer in oc.customers | orderBy: createdAt' ng-show='$index <=2'>
+      <td>{{customer.name}}</td><td>{{customer.createdAt}}</td><td><button ng-click='cc.delete(customer._id)'>Remove</button></td>
+    </tr>
+  </table>
+  <a href="#/customers">See All Customers</a>
+  <hr>
+  <h1>Most Recent Orders</h1>
+  <table>
+    <tr>
+      <td>Customer Name</td><td>Product</td><td>Quantity</td><td>Date</td><td>Actions</td>
+    </tr>
+    <tr ng-show='oc.orders.length < 1'>
+      <td> - </td><td> - </td><td> - </td><td> - </td><td> - </td>
+    </tr>
+    <tr ng-repeat='order in oc.orders |orderBy: createdAt' ng-show='$index <=2'>
+      <td>{{order.customer_name}}</td><td>{{order.product_name}}</td><td>{{order.quantity}}</td><td>{{order.created_at}}</td><td><button ng-click='oc.delete(order._id)'>Delete</button><button><a href='#/editOrders/{{order._id}}'>Edit</a></button></td>
+    </tr>
+  </table>
+</div>

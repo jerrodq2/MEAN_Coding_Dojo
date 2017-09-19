@@ -1,0 +1,20 @@
+<div ng-controller='editController as ec'>
+  <h1>Current Order Info</h1>
+  <h3>Customer Name: {{ec.order.customer_name}}</h3>
+  <h3>Product Name: {{ec.order.product_name}}</h3>
+  <h3>Quantity: {{ec.order.quantity}}</h3>
+  <h1>Update Form</h1>
+  <h5>Please fill out all fields</h5>
+  {{ec.flash}}
+  <form ng-controller='orderController as oc'>
+    Customer: <select ng-model='ec.updateOrder.customer_name'>
+      <option ng-repeat='customer in oc.customers' value={{customer.name}}>{{customer.name}}</option>
+    </select>
+    Order: <input type="number" ng-model='ec.updateOrder.quantity'>
+    <select ng-model='ec.updateOrder.product_name'>
+      <option ng-repeat='product in oc.products' value={{product.name}}>{{product.name}}</option>
+    </select>
+    <input type="submit" ng-click='ec.update(ec.order._id)' value="Update Order">
+  </form>
+  <a href="#/orders">Cancel</a>
+</div>

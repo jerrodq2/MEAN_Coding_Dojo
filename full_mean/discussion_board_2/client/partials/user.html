@@ -1,0 +1,8 @@
+<div ng-controller='userController as uc'>
+  <h3><a href="#/dashboard">Dashboard</a> | <a href="#/" ng-click='uc.logout()'>Logout</a></h3>
+  <h1>Username: {{uc.user.username}}</h1>
+  <h2>Posted...</h2>
+  <h3>{{uc.topics}} Topic(s)</h3>
+  <h3>{{uc.posts}} Post(s)</h3>
+  <h3>{{uc.comments}} Comment(s)</h3>
+</div>

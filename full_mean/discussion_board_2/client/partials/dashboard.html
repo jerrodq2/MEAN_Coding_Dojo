@@ -1,0 +1,23 @@
+<div ng-controller='dashboardController as dc'>
+  <h3><a href="#/" ng-click='dc.logout()'>Logout</a></h3>
+  <h1>Welcome, {{dc.username}}</h1>
+  Search: <input type="text" ng-model='search'>
+  <table>
+    <tr>
+      <th>Category</th><th>Topic</th><th>Username</th><th>Posts</th>
+    </tr>
+    <tr ng-repeat='top in dc.topics | orderBy: createdAt: reverse = true | filter: search'>
+      <td>{{top.category}}</td><td><a href="#/topic/{{top._id}}">{{top.topic}}</a></td><td><a href="#/user/{{top.userId}}">{{top.username}}</a></td><td>{{top.posts.length}}</td>
+    </tr>
+  </table>
+  <h2>Add a new Topic</h2>
+  {{dc.flash}}
+  <form>
+    Topic: <input type="text" ng-model='dc.newTopic.topic'>
+    Description: <input type="text" ng-model='dc.newTopic.description'>
+    Category: <select ng-model='dc.newTopic.category'>
+      <option ng-repeat='cat in dc.categories' value="{{cat.name}}">{{cat.name}}</option>
+    </select>
+    <input type="submit" ng-click='dc.create()' value="Submit">
+  </form>
+</div>

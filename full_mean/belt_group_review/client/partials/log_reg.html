@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Doc McStuffins Scheduler<br><small>Login</small></h3>
+		</div>
+				
+		<div class="col-md-4">
+			<div class="alert alert-danger" role="alert" ng-bind="logregCtrlr.errName" ng-show="logregCtrlr.errName.length > 0"></div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Login</h4>
+				</div>
+				<div class="panel-body">
+					<form ng-submit="logregCtrlr.login()">
+						<div class="form-group">
+							<label>Name:</label>
+							<input class="form-control" type="text" ng-model="logregCtrlr.logUser">
+						</div>
+						<input class="btn btn-primary" type="submit" value="Login">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

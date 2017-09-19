@@ -1,0 +1,28 @@
+<div ng-controller='mainController as mC'>
+  <h1>Welcome, {{mC.name}}</h1>
+  <h4><a href="#/" ng-click='mC.logout()'>Logout</a></h4>
+  <table>
+    <tr>
+      <th>Category</th><th>Topic</th><th>User Name</th><th>Messages</th>
+    </tr>
+    <tr ng-repeat='topic in mC.topics'>
+      <td>{{topic.category}}</td><td><a href="#/topic/{{topic._id}}">{{topic.topic}}</a></td><td><a href="#/user/{{topic.userId}}">{{topic.username}}</a></td><td>{{topic.messages.length}}</td>
+    </tr>
+  </table>
+
+  <h2>Add a new Topic</h2>
+  {{mC.flash}}
+  <form>
+    Topic: <input type="text" ng-model='mC.newTopic.topic' value="">
+    Description: <input type="text" ng-model='mC.newTopic.description'>
+    Category: <select ng-model='mC.newTopic.category'>
+      <option value="HTML">HTML</option>
+      <option value="Ruby on Rails">Ruby on Rails</option>
+      <option value="MySQL">MySQL</option>
+      <option value="Web Development">Web Development</option>
+      <option value="Python">Python</option>
+      <option value="Trends">Trends</option>
+    </select>
+    <input type="submit" ng-click='mC.createTopic()' value="Submit">
+  </form>
+</div>

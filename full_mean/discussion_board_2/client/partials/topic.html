@@ -1,0 +1,22 @@
+<div ng-controller='topicController as tc'>
+  <h2><a href="#/dashboard">Dashboard</a> | <a href="#/" ng-click='tc.logout()'>Logout</a></h2>
+  <h1><a href="#/user/{{tc.topic.userId}}">{{tc.topic.username}}</a> posted a topic:</h1>
+  <h2><i>{{tc.topic.topic}}</i></h2>
+  <h2>{{tc.topic.description}}</h2>
+  <h4>Post your answer here..</h4>
+  <form>
+    <textarea ng-model='tc.newPost.post' rows="8" cols="40"></textarea>
+    <input type="submit" ng-click='tc.addPost()' value="Post">
+  </form>
+  <hr>
+  <div ng-repeat='post in tc.topic.posts'>
+    <h4><a href="#/user/{{post.userId}}"> {{post.username}}</a>: {{post.post}}</h4>
+    <p>Likes: {{post.likes}} <button ng-click=tc.like(post._id)>Like</button></p>
+    <h5 ng-repeat='comment in post.comments'> <a href="#/user/{{comment.usesrId}}"> {{comment.username}}</a>: {{comment.comment}}</h5>
+    <form>
+      <input type="text" ng-model='comment'>
+      <input type="submit" ng-click='tc.addComment(post._id, comment); comment="" ' value="Comment">
+    </form>
+  </div>
+  <hr>
+</div>

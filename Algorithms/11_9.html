@@ -1,0 +1,66 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+    function encode(str){
+      var current=str[0];
+      var result='';
+      var count=1;
+      for (var i = 1; i < str.length; i++){
+        if (current == str[i]){
+          count ++;
+        } else{
+          result += current;
+          result += count;
+          count = 1;
+          current = str[i];
+        }
+      }
+      result += current
+      result += count;
+      console.log('Here"s the result')
+      console.log(result)
+      return result;
+    }
+    console.log(encode('aaaaabbcccrrrrrrrrr'))
+
+    function decode(str){
+      var temp = str[0];
+      var result='';
+      var numString='';
+      var num = 0;
+      for (var i = 1; i < str.length; i++){
+        if (isNaN(str[i]) == false){
+          numString += str[i];
+        } else{
+          num = parseInt(numString);
+          for(var x= 0; x < num; x++){
+            result += temp;
+          }
+          temp = str[i];
+          numString = '';
+        }
+      }
+      num = parseInt(numString);
+      for(var x= 0; x < num; x++){
+        result += temp;
+      }
+      return result
+    }
+    console.log(decode('a4b6c11d2'))
+
+  });
+
+
+  $(function(){
+    // or here, pick one.
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+
+    function StringToWord(string){
+      var temp = '';
+      var arr = [];
+      for (var i = 0; i < string.length; i++){
+        if (string[i] == ' '){
+          if (temp.length == 0){
+            continue;
+          }
+          arr.push(temp);
+          temp = '';
+        } else {
+          temp += string[i];
+        }
+      }
+      if (temp.length != 0){
+        arr.push(temp);
+      }
+      return arr;
+    }
+    console.log(StringToWord('Hello World'))
+    console.log(StringToWord('Hello longest '))
+
+    function longest(string){
+      var temp = '';
+      var long = '';
+      for (var i = 0; i < string.length; i++){
+        if( string[i] == ' '){
+          if (temp.length > long.length){
+            long = temp;
+          }
+          temp = '';
+        } else{
+          temp += string[i];
+        }
+      }
+      if (temp.length > long.length){
+        long = temp;
+      }
+      return long;
+    }
+    console.log(longest('Hello longest'));
+
+  });
+
+
+  $(function(){
+    // or here, pick one.
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>

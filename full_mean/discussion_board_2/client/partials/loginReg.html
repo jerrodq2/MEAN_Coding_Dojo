@@ -1,0 +1,18 @@
+<div ng-controller='loginRegController as lrc'>
+  <h1>Register</h1>
+  {{lrc.regFlash}}
+  <form>
+    Username: <input type="text" ng-model='lrc.reg.username'>
+    Password: <input type="password" ng-model='lrc.reg.password'>
+    Cofirm Password: <input type="password" ng-model='lrc.reg.confirm'>
+    <input type="submit" ng-click='lrc.register()' value="Register">
+  </form>
+  <hr>
+  <h1>Login</h1>
+  {{lrc.loginFlash}}
+  <form>
+    Username: <input type="text" ng-model='lrc.log.username'>
+    Password: <input type="password" ng-model='lrc.log.password'>
+    <input type="submit" ng-click='lrc.login()' value="Login">
+  </form>
+</div>

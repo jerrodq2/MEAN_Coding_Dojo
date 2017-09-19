@@ -1,0 +1,59 @@
+<div ng-controller='bidController as bC'>
+  <h3><a href="#/loginReg" ng-click='bC.logout()'>Logout</a></h3>
+  <h1>Bid Now!</h1>
+  <h3>{{bC.flash}}</h3>
+  <div>
+    <h2>Product 1</h2>
+    <form>
+      <input type="number" ng-model='amount1'>
+      <input type="submit" ng-click='bC.bid("product1", amount1); amount1 = "" ' value="Bid">
+    </form>
+    <h4>Current Bids for Product 1:</h4>
+    <ul>
+      <li ng-show='bC.bids1.length == 0'>No bids yet</li>
+      <li ng-repeat='bid in bC.bids1 | orderBy: "amount": reverse = true | filter: search1 '>
+        {{bid.username}}: ${{bid.amount}}
+      </li>
+    </ul>
+    <input type="text" ng-model='search1' placeholder="Search">
+  </div>
+  <hr>
+  <div>
+    <h2>Product 2</h2>
+    <form>
+      <input type="number" ng-model='amount2'>
+      <input type="submit" ng-click='bC.bid("product2", amount2); amount2 = "" ' value="Bid">
+    </form>
+    <h4>Current Bids for Product 2:</h4>
+    <ul>
+      <li ng-show='bC.bids2.length == 0'>No bids yet</li>
+      <li ng-repeat='bid in bC.bids2 | orderBy: "amount": reverse = true | filter: search2 '>
+        {{bid.username}}: ${{bid.amount}}
+      </li>
+    </ul>
+    <input type="text" ng-model='search2' placeholder="Search">
+  </div>
+  <hr>
+  <div>
+    <h2>Product 3</h2>
+    <form>
+      <input type="number" ng-model='amount3'>
+      <input type="submit" ng-click='bC.bid("product3", amount3); amount3 = "" ' value="Bid">
+    </form>
+    <h4>Current Bids for Product 3:</h4>
+    <ul>
+      <li ng-show='bC.bids3.length == 0'>No bids yet</li>
+      <li ng-repeat='bid in bC.bids3 | orderBy: "amount": reverse = true | filter: search3 '>
+        {{bid.username}}: ${{bid.amount}}
+      </li>
+    </ul>
+    <input type="text" ng-model='search3' placeholder="Search">
+  </div>
+  <h3>{{bC.flash}}</h3>
+
+  <div>
+    {{bC.endFlash}}
+    <h2><button ng-click='bC.endBid()'>End Bid</button></h2>
+  </div>
+
+</div>

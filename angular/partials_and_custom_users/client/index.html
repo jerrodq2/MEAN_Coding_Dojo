@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <script type="text/javascript">
+      var app = angular.module('myApp', ['ngRoute'])
+      app.config(function($routeProvider){
+        $routeProvider
+          .when('/',{
+            templateUrl: 'partials/customizeUser.html',
+          })
+          .when('/partial2',{
+            templateUrl: 'partials/userList.html',
+          })
+          .otherwise({
+            redirectTo: '/'
+          })
+      })
+      app.factory('fact', function(){
+        var factory = {};
+        var users = [
+          {first: 'Jerrod', last: 'Quintana', fav: 'Python'},
+          {first: 'Ryan', last: 'Quintana', fav: 'Javascript'},
+          {first: 'Kellen', last: 'Kennedy', fav: 'Ruby'},
+          {first: 'Alex', last: 'Leon', fav: 'HTML'},
+        ]
+        factory.show = function(callback){
+          callback(users);
+        }
+        factory.create = function(data){
+          users.push(data);
+        }
+        factory.delete = function(index){
+          users.splice(index, 1);
+        }
+        return factory;
+      })
+      app.controller('customizeUsersController', function(fact, $location){
+        var self = this;
+        console.log('hi')
+        this.users = [];
+        fact.show(function(data){
+          self.users = data;
+          console.log(this.users)
+        })
+        this.create = function(){
+          fact.create(this.newUser);
+          $location.url('/partial2');
+        }
+        this.delete = function(index){
+          fact.delete(index);
+        }
+      })
+      app.controller('userListsController', function(fact){
+        var self=this;
+        this.users = [];
+        fact.show(function(data){
+          self.users = data;
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <div>
+      <a href="#/">Customize Users</a> | <a href="#/partial2">Show All Users</a>
+      <div ng-view="">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+<div ng-controller='showControl as sc'>
+  <h1>Name: {{sc.friend.name}}</h1>
+  <h1>Age: {{sc.friend.age}}</h1>
+  <h1>Date of Birth: {{sc.friend.dob | date: MM-dd-yyyy}}</h1>
+  <h4><a href="#/">Home</a> | <a href="#/edit/{{sc.friend._id}}">Edit User</a> | <a href="#/" ng-click='sc.delete(sc.friend._id)'>Delete</a> | <a href="#/new">Add User</a></h4>
+</div>

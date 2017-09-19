@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <h3>Submitted info</h3>
+      Name: <%= user.name %>
+      <!-- How we access things that were sent over from the back, or server.js in this case. It's sent over in a Javascript object format, and user is a key, equal to another object, so in this case, we access the value attached to the 'name' key -->
+      <hr>
+      Location: <%= user.location %>
+      <hr>
+      Language: <%= user.language %>
+      <hr>
+      Comment: <%= user.comment %>
+      <hr>
+      <a href="/">Home</a>
+    </div>
+  </body>
+</html>

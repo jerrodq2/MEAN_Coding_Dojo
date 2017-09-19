@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+
+  $(document).ready(function(){
+    function uniqueLetter(str){
+      var newStr = '';
+      for (var i = 0; i < str.length; i++){
+        var count = 0;
+        for (var x = 0; x < str.length; x++){
+          if (str[i] == str[x])
+            count++;
+          if (count > 1)
+            break;
+        }
+        if (count  == 1)
+          newStr += str[i];
+      }
+      return newStr;
+    }
+    console.log( uniqueLetter('Snap! Crackle! And Pop?') )
+
+  });
+
+
+  $(function(){
+    // or here, pick one.
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>

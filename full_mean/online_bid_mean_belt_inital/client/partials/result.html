@@ -1,0 +1,20 @@
+<div ng-controller='bidController as bC'>
+  <h3><a href="#/loginReg" ng-click='bC.logout()'>Logout</a></h3>
+  <h1>{{bC.username}} has ended the Bid.</h1>
+  <h4>Highest bid per Product</h4>
+  <div>
+    <h2>Product 1</h2>
+    <h4 ng-repeat='bid in bC.bids1 | orderBy: "amount": reverse = true' ng-show='$index == 0'>{{bid.username}}: ${{bid.amount}}</h4>
+  </div>
+  <hr><div>
+    <h2>Product 2</h2>
+    <h4 ng-repeat='bid in bC.bids2 | orderBy: "amount": reverse = true' ng-show='$index == 0'>{{bid.username}}: ${{bid.amount}}</h4>
+  </div>
+  <hr>
+  <div>
+    <h2>Product 3</h2>
+    <h4 ng-repeat='bid in bC.bids3 | orderBy: "amount": reverse = true' ng-show='$index == 0'>{{bid.username}}: ${{bid.amount}}</h4>
+  </div>
+
+  <h2><button ng-click='bC.reset()'>Start Bid </button></h2>
+</div>

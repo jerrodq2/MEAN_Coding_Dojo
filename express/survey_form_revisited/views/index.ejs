@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- jquery link is needed for sockets evidently -->
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            var socket = io.connect();
+
+            $('button').click(function (){
+              var info = {
+                name: $('#name').val(),
+                location: $('#location').val(),
+                language: $('#language').val(),
+                comment: $('#comment').val()
+              }
+              socket.emit("posting_form", info);
+            });
+            socket.on('response', function (data){
+              console.log(data)
+              $('.test').append('<h1 class ="green">You emitted the following information to the server: '+JSON.stringify(data.answer)+'</h1>'+'<h1 class ="green">Your lucky number emitted by ther server is '+data.number+'.</h1>')
+            });
+        })
+    </script>
+    <style media="screen">
+      .test{
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test"></div>
+      <div class="">
+        <form class="" action="#" method="post">
+          Your name: <input id="name" type="text" name="name" value="">
+          Dojo Location: <input type="text" name="location" id="location"value="">
+          Favorite Language: <select id="language"class="" name="language">
+            <option value="python">Python</option>
+            <option value="javascript">Javascript</option>
+          </select>
+          Comment (optional): <textarea id="comment"name="comment" rows="8" cols="40"></textarea>
+          <button type="button" name="button">button</button>
+        </form>
+    </div>
+  </body>
+</html>
