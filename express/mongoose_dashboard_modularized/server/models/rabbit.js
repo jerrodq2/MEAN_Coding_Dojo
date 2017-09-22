@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var RabbitSchema = new mongoose.Schema({
- name: String,
+ name: {type: String, required: true},
  age: Number,
  color: String
 })

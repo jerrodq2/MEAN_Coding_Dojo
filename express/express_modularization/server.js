@@ -17,6 +17,8 @@ var routes_setter = require('./server/config/routes.js')
 routes_setter(app);
 // invoke the function stored in routes_setter and pass it the "app" variable
 
+//For the above routes_setter lines, you could also just do "require('./server/config/routes.js')(app)", which is cleaner and what I do in full mean, no need for a variable
+
 
 
 // DESCRIPTION FOR MODULARIZATION PARTS AND WHAT EACH DOES BELOW

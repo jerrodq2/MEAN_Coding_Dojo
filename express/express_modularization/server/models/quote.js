@@ -1,4 +1,4 @@
-// require mongoose
+// require mongoose at the top of every model file
 var mongoose = require('mongoose');
 // create the schema
 var QuoteSchema = new mongoose.Schema({
