@@ -45,12 +45,6 @@ app.post('/result', function(req, res){
   // console.log("*******************")
   // console.log("*******************")
   // console.log("*******************")
-  // console.log("*******************")
-  // console.log("*******************")
-  // console.log("*******************")
-  // console.log("*******************")
-  // console.log("*******************")
-  // console.log("*******************")
   // console.log(res)
 
   // req and rew in function stand for request, and response (server response actually). Both, especially req, are very long and contain a lot of info you don't care about. What's important in req is it's body or req.body, which contains the form info sent over. You can uncomment the above console.logs to see examples of them

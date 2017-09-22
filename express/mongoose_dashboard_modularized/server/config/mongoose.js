@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var fs=require('fs');
 var path = require('path');
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/integrating_mongoose');
 
 var models_path = path.join(__dirname, './../models');
