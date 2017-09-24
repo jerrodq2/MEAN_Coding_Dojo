@@ -1,6 +1,9 @@
-
+  <!-- You use "ng-controller" to specify that this partial is using mean, and anything writtin within its scope has access to that controller. For example, if I write something outside of the below div, it won't have access to the 'customizeUsersController', only within the div, or i'd have to write ng-controller again.  -->
+  <!-- Also, note that I write "as custom", when you're not using $scope, you have to refer to the variables and methods of the controller with the controller name before it. But "{{customizeUsersController.variable}}" is annoying to write, so when we use "as new_name" in the ng-controller directive, we give it an alias or short-name. This way, I can write "{{custom.variable}}" instead of the full name. Similar to writting "Select first_name u FROM Users u" in mySQL. -->
   <div ng-controller='customizeUsersController as custom'>
     <h1>Users Controller</h1>
+    <!-- IMPORTANT Note: Notice how below how I use ng-model. angular won't see the value="" in a form, it will only see the ng-model. I also don't send the form anywhere, when the button is clicked I activate the controller function "create", as shown in ng-click. Basically, ng-model="custom.newUser.first" creates an object called "newUser" with a key "first", which is blank at first, but it gets updated as soon as the inputs do. So by the time you click the submit button, it looks like: {first: "Jerrod", last: "Quintana", fav: "Python"}. Then in the controller, when create is called, it activates another function in the factory by "first_factory.create(this.newUser);", so it passes it the newUser object I created. Another way I could do this, was write the controller's create function to take a parameter, ex: "this.create=function(user_data){}", then when I call it below, pass the newUser object there, ex: "ng-click='custom.create(custom.newUser)' ", doing it this way, I woudln't need to make newUser owned by the controller, but either way works.  -->
+    <!-- IMPORTANT Note: As stated above, in the form I don't send the individual inputs over as individual variables or values. I sent it over in an object, which makes it much easier to pass back and forth, and since i'm using full mean and mongodb, I work a lot with JSON data. So, you should get used to and familiar with passing data from the view to the controller then to the model and vice versa in json format as well.  -->
     <form>
       First Name: <input type="text" ng-model='custom.newUser.first'>
       Last Name: <input type="text" ng-model='custom.newUser.last'>
@@ -11,8 +14,10 @@
       <tr>
         <th>First Name</th><th>Last Name</th><th>Fav Language</th><th>Actions</th>
       </tr>
+      <!-- Below is an example of ng-repeat which is basically angular's version of a for loop. user is an array of objects, and "user in custom.users" means that 'user' represents each index in that array. -->
       <tr ng-repeat='user in custom.users'>
         <td>{{user.first}}</td><td>{{user.last}}</td><td>{{user.fav}}</td><td><button ng-click='custom.delete($index)'>Delete user</button></td>
+        <!-- As shown below, "$index" is a very handy tool, it represents which iteration of the loop we're in and is most likely only used with ng-repeat. So, if I press the button in the top/first row, that is the first iteration and $index is equal to 0, for the 0 index. I pass it to the custom.delete() function so it knows which index to delete from the array. -->
       </tr>
     </table>
   </div>

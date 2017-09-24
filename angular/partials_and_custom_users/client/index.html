@@ -1,73 +1,225 @@
 <!DOCTYPE html>
-<html ng-app='myApp'>
+<html ng-app='myApp'> <!-- IMPORTANT: ng-app defines this as an angularjs application, if there is angular code written outside the bounds of this ng-app's scope, it won't work. This should go at the top of your index.html file, since all files are loaded within it, and all partials are within it. What goes in the quote marks (myApp in this case), is defined with your app.js file normally, but it is below, the line "var app = angular.module('myApp',....)" -->
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- The version of the two below (angular and angular-route) must match! -->
+    <!-- in full mean, this is where you load your controllers, factories, etc. but your app.js file needs to be first! after you load your bower files -->
     <script src="angular/angular.js"></script>
     <script src="angular-route/angular-route.js"></script>
     <script type="text/javascript">
+
+    // **************** START OF APP.JS FILE IN FULL MEAN ******************
+    //The below code is in the app.js file in the client folder in full mean. This is used to tell server.js which partial to load. On startup, server.js loads index.html, and the app.config below tells it load a partial.
+
+      // The "var app =" line is defining an angularJS module, which defines an angularJS application. Whatever you name this variable is what goes in front of .config, .controller, and .factory, so if I named this "var seven", then the next line would start as "seven.config(" and the controllers that use it would start with "app.controller()", etc. However, what you put in quotes after ".module(", 'myApp' in this case, is what goes in the html file with "ng-app" at the top. In this example, 'app' is actually the name of the module, and 'myApp'an HTML element in which the application will run. think of it like "var func = function(){....}", 'func' is the name of the function just like 'app' is hte name of the module. But the curly brackets "{}" define the scope of the function or what the rest of the function goes in, just like how the rest of the angular code takes place within myApp's scope.
       var app = angular.module('myApp', ['ngRoute'])
-      app.config(function($routeProvider){
-        $routeProvider
+      //within the angular.module, in the array is where you list your dependent modules. If you don't have an array as the second paramter, even an empty one, then you are not creating a new module but retreiving an existing one. Inside this array is where you list your dependent modules, the ones that will be used throughout your entire angular module application. Basically, any bower component that you installed besides angular (angular-route, angular-cookies, etc.) will be listed here, or your angular application won't recognize it. Examples are 'ngRoute' for angular-route and 'ngCookies' for angular-cookies. Even if you listed them in your html header, they need to be listed with this module.
+      app.config(function($routeProvider){ //$routeProvider must be in the parenthesis, and if you don't have angular-route installed and linked in the index.html file, it won't work.
+
+        //Below is where you list the routes, which in term loads the partials. The below route "/partial2", would look like this in the url: "localhost:5000/#/partial2", all partials start with "/#/", with just a slash being the usual default or root partial. these routes are within the scope of the app.config
+        $routeProvider //All partial routes are listed below '$routeProvider'
           .when('/',{
             templateUrl: 'partials/customizeUser.html',
-          })
+          }) //this says when you go to the partial route '#/', then go to the partials folder and load the customizeUser.thml file. you list the route, then in the templateUrl, you list the file path to the file/partial that you want loaded.
           .when('/partial2',{
             templateUrl: 'partials/userList.html',
           })
+          .when('/partial3',{
+            templateUrl: 'partials/scope_example.html',
+          })
           .otherwise({
             redirectTo: '/'
-          })
+          })// .otherwise means that if any partial route is listed that isn't in the above routes, go to where .otherwise tells you instead. Similar to an 'else' in an 'if' statement. this like could also just be written as ".otherwise('/')", the parenthesis, curly brackets, and redirectTo isn't necessary in a .otherwise
       })
-      app.factory('fact', function(){
-        var factory = {};
+
+      //Basically, the format of your app.js file and routes is as follows:
+      //******** start of app.js format example
+
+      // var module_name = angular.module('goes_at_the_top_of_index.html', ['dependent modules'])
+      // module_name.config(function($routeProvider){
+      //
+      //   $routeProvider
+      //   .when('route_here',{
+      //     templateUrl: 'file_path_to_the_partial_file_here'
+      //   })
+      //   .otherwise('a_route_to_redirect_here')
+      // })
+
+      //******** end of app.js format example
+
+
+      // **************** END OF APP.JS FILE IN FULL MEAN ******************
+
+
+
+
+
+
+
+      //******************* START OF FACTORY FILES IN FULL MEAN **********************
+      // A factory is an AngularJS service. It is an object that you add properies to, then return the object, and pass it to the controller as service. A service is a substitutable object that is wired together using dependency injection (DI), and is used to organize and share code across an app. Factories are one of the most popular services, and the one I use with angular and full mean to communicate with the client side controller and server side controller. This is usually within the factories folder and is where I put my http requests, logic, pre-server side validations, and query work. Any variables created in a factory are private, you would need to pass them to a function (like I do below), or write getter/setter methods. The one below is simplified due to this not being a full mean app. See below for an example format for a factory, and at the bottom of the controllers for an important note/pointer about the format
+
+      //Creating a factory is similar to a controller (which I show below), it starts with the name of your module, followed by ".factory()", within the parenthesis, you first put the name of this factory, which can be whatever you want. Then, inside the function parenthesis, you put the services you want to use in this factory, some common ones used in the factories are $http, $routeParams, $location, and $cookies. If they're not listed here, you don't have access to them.
+
+      //Next, you always create an object first in your factory, this is what gets returned to the controller at the end. Here, I call it "factory_object" but you can name it whatever, I usually name it "factory". Also, any variables/attributes and functions/methods that you want to be accessible in the controller needs to be listed as properties or attributes to this object. Meaning, if I wanted the controller to have direct access to the "users" array, then instead of "var users", i would write "factory_object.users". The controller has access to the "example" string below, but I have to pass the users array through the callbacks, because the users array is currently a private variable.
+      app.factory('first_factory', function(){
+        var factory_object = {}; //always start your controller by creating an object.
         var users = [
           {first: 'Jerrod', last: 'Quintana', fav: 'Python'},
           {first: 'Ryan', last: 'Quintana', fav: 'Javascript'},
           {first: 'Kellen', last: 'Kennedy', fav: 'Ruby'},
           {first: 'Alex', last: 'Leon', fav: 'HTML'},
-        ]
-        factory.show = function(callback){
+        ] // this is currently a private variable, the controller doesn't have direct access to it.
+        factory_object.example = 'Example here' // this is a property of the factory object, so controllers have direct access to it.
+
+        //below I create 3 factory methods that are called in the controller. Notice, how the first one accepts a callback as a parameter. It's simple callback functions 101, it accepts and callback and immediately activates/calls that callback and passes it data, the users array in this case. This gives the controller access to that private variable, then, as you can see in the controllers below, the callback function expects said parameter and does something with it. In this case, it makes it equal to a variable on the controller side so it can be passed ot the view. this controller/factory function and callback function is basically the heart and soul of angularJS apps, at least how I write them and how I communicate the client side with the server side in full mean apps.
+        factory_object.show = function(callback){
           callback(users);
         }
-        factory.create = function(data){
+        factory_object.create = function(data){
           users.push(data);
         }
-        factory.delete = function(index){
+        factory_object.delete = function(index){
           users.splice(index, 1);
         }
-        return factory;
+        return factory_object; //always return the object at the end of your factory but still within its scope.
       })
-      app.controller('customizeUsersController', function(fact, $location){
+
+      //Start of example format for factory below:
+      /*
+
+      app_module_name.factory('factory_name_here', function(any services $services){
+
+      var whatever_you_name_your_object = {}
+
+      code here....
+
+      return whatever_you_name_your_object
+
+      })
+
+      */
+      //End of example format for factory below:
+
+
+      //******************* END OF FACTORY FILES IN FULL MEAN **********************
+
+
+
+
+
+
+
+      //******************* START OF CONTROLLER FILES IN FULL MEAN **********************
+      // You create all controllers with the name of your module (app in this case) followed by .controller(). Within the parenthesis, you first list the name of this controller, which is whatever you make it, then you start a function, which is what the rest of the controller is whithin. For the paramters of the function the order doesn't matter and you list them all without quote marks, but you need to list the name(s) of any factories that they use (first_factory in this example), and any services/objects that you want to use. See after the 3 controllers for an exmple of the format, and after that for an important note/pointer for both factories and controllers
+
+      //A service is a function or object that can be used in and only in your angular application. "$location" is a service, some other ones commonly used later in full mean are "$cookies", "$http", and "$routeParams", though some of those are used in the factory. If they are not listed inside the function as a parameter, you don't have access to them.
+
+      //THIS AND SELF: “this” is available in the controller function by default and refers to the controller and it’s variables, methods, etc. When you're not using $scope (shown below), then you declare and access all variables and functions inside the controller with "this." as shown below. "self" is very important because, "this" refers to the object/constructor whose scope it is whithin. so "this.test" shown below is within the controller's scope. But, in the first_factory.show() function, the callback is written in the controller but it is actually called and gets executed in the factory, therefore, the first console.log with "this.test" refers to a test variable in the factory. Since one doesn't exist, it is undefined. However, the next console.log uses "self.test", which refers to the variable declared in the controller. Whenver I type "var self = this" in the controller, I'm creating a variable and assigning it the controller itself and all of its variables and methods. It's basically the same as saying "var self = The_controller_we_are_currently_in", so no matter where "self" is called, it still refers to this controller. The difference is important when we use callback functions that get called in the factory.
+
+      app.controller('customizeUsersController', function(first_factory, $location){
         var self = this;
-        console.log('hi')
-        this.users = [];
-        fact.show(function(data){
-          self.users = data;
-          console.log(this.users)
+        this.test = 'test'
+        console.log(first_factory.example); // just showing how I can directly access a factory's variables if they are created as properties to the factory object
+
+        //unlike the create and delete functions below, the show() function isn't assinged to variable. What it is actually doing is calling the function show() from the factory and passing it a callback function as a paramter. The factory and controller are objects, so it's a calling a function from the factory directly. It would be the same as assigning a function to a variable (var_one), and the on the next line typing "var_one()". The function was assigned to the variable "show" inside the factory, then the factory is automatically loaded when this controller is, and lastly, this controller automatically calls that function whenever it is loaded. So, whenver you write "factory_name.function_name(callbackHere...){}" inside a controller, it is automatically run when the controller is loaded.
+        first_factory.show(function(data){
+          self.users = data; // this line assigns the controller varible "users" to be equal to the data passed to the callback, an array of objects. This is always automatically loaded, so we don't have to deal with the possiblity of an empty or non-existing array in the view.
+          console.log(this.test) // undefined, there is no test variable in the factory, "this" is whithin the factory's scope and refers to the factory
+          console.log(self.test) // "test", by using "self", we are referring to the test varaible inside this controller.
         })
+
+        //below I create two variables and assign them to a function. The functions are activated by something on the view .
         this.create = function(){
-          fact.create(this.newUser);
-          $location.url('/partial2');
+          first_factory.create(this.newUser); //this calls the factory function/variable "create" and passes it the data for the user we're trying to create.
+          $location.url('/partial2'); //$location is basically like redirectTo, this just tells it to go to the partial route "/#/partial2"
         }
         this.delete = function(index){
-          fact.delete(index);
+          first_factory.delete(index);
         }
       })
-      app.controller('userListsController', function(fact){
-        var self=this;
-        this.users = [];
-        fact.show(function(data){
-          self.users = data;
+
+
+      //The below controller was created to demonstrate how $scope works. You can either use $scope or "this", in order you to use scope, you have to pass it to the controller function as shown below. You then have to create all of your variables and methods with "$scope." in front of them. The benefit to this is that you can refer to them directly in the view/partial, you don't need to put {{controller_name.name}}, you can just put {{name}}. another benefit is that $scope is absolute, it always refers to this controller, since the factory wasn't passed $scope, we don't have to worry about the this/self problem, as shown in the "show" function below.
+      app.controller('scope_example_controller', function(first_factory, $scope){
+        $scope.name = 'Jack_2_ng-model_example_using_scope' //used in the view
+        $scope.arr = ['Hey', 'There', 4]
+        first_factory.show(function(data){
+          $scope.users = data; //Notice how I dont' have to put "self.users", $scope will always refer to this controller, or the controller it was passed to.
         })
       })
+
+      app.controller('userListsController', function(first_factory){
+        var self=this;
+        this.name = 'Jack_1_ng-model_example_not_using_scope' //used in the view
+        first_factory.show(function(data){
+          self.users = data;
+          console.log(this.name); //undefined
+          console.log(self.name); // 'Jack_1_ng-model_example_not_using_scope'
+        })
+
+        //I created the below function just to demonstrate how you activate/call functions from the view. You start by creating them hear and assigning them to a variable.
+        this.test = function(){
+          console.log(this.name);
+        }
+      })
+
+      //Start of example format for controller below:
+      /*
+
+      app_module_name.controller('controller_name_here', function(factory_name, $services){
+
+      code here....
+
+      })
+
+      */
+      //End of example format for controller below:
+
+
+      //******************* END OF CONTROLLER FILES IN FULL MEAN **********************
+
+
+      // *************** IMPORTANT Note/POINTER FOR FACTORY AND CONTROLLER FORMATS ********************
+
+      //As shown above, both controller and factory formats are very similar, but one useful thing I let about above was that you can create shorter names for your services, this especially comes in handy in larger, full mean apps, where you type them more often. You do this by, putting both the function and the servies in an array. See the normal format for a controller below:
+
+      /*
+      app_module_name.controller('controller_name_here', function(factory_name, $location, $cookies){
+      code here....
+      })      */
+
+      // Now see how I put he function, factory name, and services in an array after the controller name:
+
+      /*
+      app_module_name.controller('controller_name_here', ['factory_name', '$location', '$cookies', function(fac_name, loc, cook){
+      code here....
+      }])    */
+
+      //Basicaly, after I write th controller name but before I create the function I open an array, and write the factory name and servies in quote marks, separated by commas. The function is also an index in that array, and inside the function's parenthesis, I write the factory name and servies again, but with the new short names that I want to use. The important thing is to write the short names in the same order that you wrote the services, that's how the controller nows which new name refers to which service. So, fac_name is short for "factory_name", loc is short for $location, and cook is short for $cookie. If I switched the short name for loc and cook, the the controller would read loc as $cookie and cook as $location. Now see an example of the factory for my final example:
+
+      /*
+      app_module_name.factory('factory_name_here', ['$http', '$routeParams', '$location', '$cookies', function(http, routeP, location, cookie){
+      var whatever_you_name_your_object = {}
+      code here....
+      return whatever_you_name_your_object
+      }]) */
+
+      // *********** END OF IMPORTANT Note/POINTER FOR FACTORY AND CONTROLLER FORMATS *****************
     </script>
+
+
   </head>
   <body>
+
     <div>
-      <a href="#/">Customize Users</a> | <a href="#/partial2">Show All Users</a>
+      <a href="#/">Customize Users</a> | <a href="#/partial2">Show All Users</a> | <a href="#/partial3">See example of $scope</a>
+      <!-- The below div has "ng-view" in it, this is where ALL of the partials go. anything done to/included in this div will happen to all the divs, and anything written outside of it, like the links above, will show up on all the partials. Also, this is important to keep in mind when working with bootstrap.  -->
       <div ng-view="">
       </div>
+
     </div>
+
   </body>
 </html>
