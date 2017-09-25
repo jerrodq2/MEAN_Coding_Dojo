@@ -10,7 +10,7 @@
     <script type="text/javascript">
 
     // **************** START OF APP.JS FILE IN FULL MEAN ******************
-    //The below code is in the app.js file in the client folder in full mean. This is used to tell server.js which partial to load. On startup, server.js loads index.html, and the app.config below tells it load a partial.
+    //The below code is in the app.js file in the client folder in full mean. This is used to tell server.js which partial to load. On startup, express loads index.html since we don't tell it load anything else and we are in the root "/" url, and then the app.config below tells it load a partial.
 
       // The "var app =" line is defining an angularJS module, which defines an angularJS application. Whatever you name this variable is what goes in front of .config, .controller, and .factory, so if I named this "var seven", then the next line would start as "seven.config(" and the controllers that use it would start with "app.controller()", etc. However, what you put in quotes after ".module(", 'myApp' in this case, is what goes in the html file with "ng-app" at the top. In this example, 'app' is actually the name of the module, and 'myApp'an HTML element in which the application will run. think of it like "var func = function(){....}", 'func' is the name of the function just like 'app' is hte name of the module. But the curly brackets "{}" define the scope of the function or what the rest of the function goes in, just like how the rest of the angular code takes place within myApp's scope.
       var app = angular.module('myApp', ['ngRoute'])
@@ -36,15 +36,16 @@
       //Basically, the format of your app.js file and routes is as follows:
       //******** start of app.js format example
 
-      // var module_name = angular.module('goes_at_the_top_of_index.html', ['dependent modules'])
-      // module_name.config(function($routeProvider){
-      //
-      //   $routeProvider
-      //   .when('route_here',{
-      //     templateUrl: 'file_path_to_the_partial_file_here'
-      //   })
-      //   .otherwise('a_route_to_redirect_here')
-      // })
+      /*
+      var module_name = angular.module('goes_at_the_top_of_index.html', ['dependent modules'])
+      module_name.config(function($routeProvider){
+
+        $routeProvider
+        .when('route_here',{
+          templateUrl: 'file_path_to_the_partial_file_here'
+        })
+        .otherwise('a_route_to_redirect_here')
+      }) */
 
       //******** end of app.js format example
 
@@ -58,7 +59,7 @@
 
 
       //******************* START OF FACTORY FILES IN FULL MEAN **********************
-      // A factory is an AngularJS service. It is an object that you add properies to, then return the object, and pass it to the controller as service. A service is a substitutable object that is wired together using dependency injection (DI), and is used to organize and share code across an app. Factories are one of the most popular services, and the one I use with angular and full mean to communicate with the client side controller and server side controller. This is usually within the factories folder and is where I put my http requests, logic, pre-server side validations, and query work. Any variables created in a factory are private, you would need to pass them to a function (like I do below), or write getter/setter methods. The one below is simplified due to this not being a full mean app. See below for an example format for a factory, and at the bottom of the controllers for an important note/pointer about the format
+      // A factory is an AngularJS service. It is an object that you add properties to, then return the object, and pass it to the controller as service. A service is a substitutable object that is wired together using dependency injection (DI), and is used to organize and share code across an app. Factories are one of the most popular services, and the one I use with angular and full mean to communicate with the client side controller and server side controller. This is usually within the factories folder and is where I put my http requests, logic, pre-server side validations, and query work. Any variables created in a factory are private, you would need to pass them to a function (like I do below), or write getter/setter methods. The one below is simplified due to this not being a full mean app. See below for an example format for a factory, and at the bottom of the controllers for an important note/pointer about the format
 
       //Creating a factory is similar to a controller (which I show below), it starts with the name of your module, followed by ".factory()", within the parenthesis, you first put the name of this factory, which can be whatever you want. Then, inside the function parenthesis, you put the services you want to use in this factory, some common ones used in the factories are $http, $routeParams, $location, and $cookies. If they're not listed here, you don't have access to them.
 
@@ -112,7 +113,7 @@
 
 
       //******************* START OF CONTROLLER FILES IN FULL MEAN **********************
-      // You create all controllers with the name of your module (app in this case) followed by .controller(). Within the parenthesis, you first list the name of this controller, which is whatever you make it, then you start a function, which is what the rest of the controller is whithin. For the paramters of the function the order doesn't matter and you list them all without quote marks, but you need to list the name(s) of any factories that they use (first_factory in this example), and any services/objects that you want to use. See after the 3 controllers for an exmple of the format, and after that for an important note/pointer for both factories and controllers
+      // You create all controllers with the name of your module (app in this case) followed by .controller(). Within the parenthesis, you first list the name of this controller, which is whatever you make it, then you start a function, which is what the rest of the controller is whithin. For the parameters of the function the order doesn't matter and you list them all without quote marks, but you need to list the name(s) of any factories that they use (first_factory in this example), and any services/objects that you want to use. See after the 3 controllers for an exmple of the format, and after that for an important note/pointer for both factories and controllers
 
       //A service is a function or object that can be used in and only in your angular application. "$location" is a service, some other ones commonly used later in full mean are "$cookies", "$http", and "$routeParams", though some of those are used in the factory. If they are not listed inside the function as a parameter, you don't have access to them.
 
@@ -138,7 +139,7 @@
         this.delete = function(index){
           first_factory.delete(index);
         }
-      })
+      }) //end of first controller
 
 
       //The below controller was created to demonstrate how $scope works. You can either use $scope or "this", in order you to use scope, you have to pass it to the controller function as shown below. You then have to create all of your variables and methods with "$scope." in front of them. The benefit to this is that you can refer to them directly in the view/partial, you don't need to put {{controller_name.name}}, you can just put {{name}}. another benefit is that $scope is absolute, it always refers to this controller, since the factory wasn't passed $scope, we don't have to worry about the this/self problem, as shown in the "show" function below.
@@ -148,7 +149,7 @@
         first_factory.show(function(data){
           $scope.users = data; //Notice how I dont' have to put "self.users", $scope will always refer to this controller, or the controller it was passed to.
         })
-      })
+      }) //end of second controller
 
       app.controller('userListsController', function(first_factory){
         var self=this;
@@ -163,7 +164,7 @@
         this.test = function(){
           console.log(this.name);
         }
-      })
+      }) //end of third controller
 
       //Start of example format for controller below:
       /*
@@ -181,23 +182,29 @@
       //******************* END OF CONTROLLER FILES IN FULL MEAN **********************
 
 
+
+
+
       // *************** IMPORTANT Note/POINTER FOR FACTORY AND CONTROLLER FORMATS ********************
 
-      //As shown above, both controller and factory formats are very similar, but one useful thing I let about above was that you can create shorter names for your services, this especially comes in handy in larger, full mean apps, where you type them more often. You do this by, putting both the function and the servies in an array. See the normal format for a controller below:
+      //As shown above, both controller and factory formats are very similar, but one useful thing I let about above was that you can create shorter names for your services, this especially comes in handy in larger, full mean apps, where you type them more often. You do this by, putting both the function and the services in an array. See the normal format for a controller below:
 
       /*
       app_module_name.controller('controller_name_here', function(factory_name, $location, $cookies){
       code here....
       })      */
 
-      // Now see how I put he function, factory name, and services in an array after the controller name:
+
+      // Now see how I put the function, factory name, and services in an array after the controller name:
 
       /*
       app_module_name.controller('controller_name_here', ['factory_name', '$location', '$cookies', function(fac_name, loc, cook){
       code here....
       }])    */
 
+
       //Basicaly, after I write th controller name but before I create the function I open an array, and write the factory name and servies in quote marks, separated by commas. The function is also an index in that array, and inside the function's parenthesis, I write the factory name and servies again, but with the new short names that I want to use. The important thing is to write the short names in the same order that you wrote the services, that's how the controller nows which new name refers to which service. So, fac_name is short for "factory_name", loc is short for $location, and cook is short for $cookie. If I switched the short name for loc and cook, the the controller would read loc as $cookie and cook as $location. Now see an example of the factory for my final example:
+
 
       /*
       app_module_name.factory('factory_name_here', ['$http', '$routeParams', '$location', '$cookies', function(http, routeP, location, cookie){
