@@ -3,17 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src ='angular/angular.js'></script>
     <script src ='angular-cookies/angular-cookies.js'></script>
     <!-- End Bower Components -->
+
+
     <script type="text/javascript">
       var app = angular.module('myApp', ['ngCookies'])
+
       app.factory('registrationFactory', ['$http', function($http){
+        //$http is critical to passing data from the client to the server and vice versa, we do this through a http request. We can only pass json data through it on either side, the basic format is as follows:
+        /*
+        $http.action('/route', optiona_json_data).then(function(response){
+          do something.....
+        })
+        */
+
+        // So, we specify the action (get, post, etc.) after $http. then we specify the route to hit, and we give it any json data we want to send over. This is optional and must be in json format. It is followed by a .then() which is where we but the callback function. That function takes a parameter which represents the response from the server. this response is an object with a lot of irrelevant data, the only thing we care about is the data key, or "response.data"
             var factory = {};
             factory.reg = function(user, callback) {
               $http.post('/', user).then(function(response){
                 console.log(response.data)
                 callback(response.data.message)
+                //this app is a simplified login/reg, so I dont' do any if statements in this method.
               })
             }
             factory.login= function(user, callback){
@@ -26,10 +38,18 @@
                 }
               })
             }
+
+
+
+
         return factory
       }])
 
+
+
+
       app.controller('registrationController', ['$scope', '$cookies','registrationFactory', function($scope, cookie, registrationFactory){
+        //the $cookies module provies read/write access to the browser's cookies. $cookies isn't used in full mean, you switch to session. But, you use $cookies.get('key') to retrieve the value, and $cookies.put('key', value) to set the value of a cookie.
         $scope.message = ''
         $scope.success = ''
         console.log(cookie.get('test'))

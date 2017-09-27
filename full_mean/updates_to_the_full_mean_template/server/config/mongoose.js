@@ -3,9 +3,12 @@ var mongoose      = require('mongoose'),
     path          = require('path'),
     models_path   = path.join( __dirname, "../serverModels"),
     reg           = new RegExp( ".js$", "i" ),
-    dbURI         = 'mongodb://localhost/test';
+    dbURI         = 'mongodb://localhost/DB_name_here';
 
-mongoose.connect( dbURI );
+mongoose.Promise = global.Promise;
+mongoose.connect( dbURI, {
+  useMongoClient: true
+});
 
 mongoose.connection.on( 'connected', function () {
   console.log( `Mongoose default connection open to ${ dbURI }` );
