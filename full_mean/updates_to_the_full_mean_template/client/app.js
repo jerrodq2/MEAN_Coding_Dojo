@@ -1,5 +1,9 @@
 var app = angular.module('myApp', ['ngRoute', 'ngCookies'])
 
+app.config(['$locationProvider', function($locationProvider) {
+  $locationProvider.hashPrefix('');
+}]);
+
 app.config(function ($routeProvider) {
 
 $routeProvider
