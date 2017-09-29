@@ -16,6 +16,11 @@
 
       // The "var app =" line is defining an angularJS module, which defines an angularJS application. Whatever you name this variable is what goes in front of .config, .controller, and .factory, so if I named this "var seven", then the next line would start as "seven.config(" and the controllers that use it would start with "app.controller()", etc. However, what you put in quotes after ".module(", 'myApp' in this case, is what goes in the html file with "ng-app" at the top. In this example, 'app' is actually the name of the module, and 'myApp'an HTML element in which the application will run. think of it like "var func = function(){....}", 'func' is the name of the function just like 'app' is hte name of the module. But the curly brackets "{}" define the scope of the function or what the rest of the function goes in, just like how the rest of the angular code takes place within myApp's scope.
       var app = angular.module('myApp', ['ngRoute'])
+
+      app.config(['$locationProvider', function($locationProvider) {
+        $locationProvider.hashPrefix('');
+      }]); //this code block is included due to a change/update to angular, I explain why in the project "trying_sessions_mean" in my full_mean folder
+
       //within the angular.module, in the array is where you list your dependent modules. If you don't have an array as the second paramter, even an empty one, then you are not creating a new module but retreiving an existing one. Inside this array is where you list your dependent modules, the ones that will be used throughout your entire angular module application. Basically, any bower component that you installed besides angular (angular-route, angular-cookies, etc.) will be listed here, or your angular application won't recognize it. Examples are 'ngRoute' for angular-route and 'ngCookies' for angular-cookies. Even if you listed them in your html header, they need to be listed with this module.
       app.config(function($routeProvider){ //$routeProvider must be in the parenthesis, and if you don't have angular-route installed and linked in the index.html file, it won't work.
 
