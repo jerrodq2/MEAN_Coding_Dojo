@@ -11,7 +11,7 @@ var UserSchema = new mongoose.Schema({
  },
  email: {
    type: String,
-   unique: true,
+   unique: true, //makes sure that no two users can have the same database
    required: true
  },
  password:{

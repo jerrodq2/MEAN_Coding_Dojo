@@ -7,6 +7,7 @@
     Email: <input type="email" ng-model='lrc.reg.email'>
     Password: <input type="password" ng-model='lrc.reg.password'>
     Cofirm Password: <input type="password" ng-model='lrc.reg.confirm'>
+    Do you want to be remembered: <input type="checkbox" ng-model="lrc.reg.remembered">
     <input type="submit" ng-click='lrc.register()' value="Register">
   </form>
   <hr>
@@ -15,6 +16,7 @@
   <form>
     Email: <input type="text" ng-model='lrc.log.email'>
     Password: <input type="password" ng-model='lrc.log.password'>
+    Do you want to be remembered: <input type="checkbox" ng-model="lrc.log.remembered">
     <input type="submit" ng-click='lrc.login()' value="Login">
   </form>
   <button ng-click='lrc.logout()'>Logout</button>
