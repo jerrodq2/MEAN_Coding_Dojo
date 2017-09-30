@@ -1,4 +1,4 @@
-//This file shows how to use sessions, first you need to install it with "npm install --save express-session" to use the sessions and "npm install --save connect-mongo" to save them in mongodb. connect-mongo allows you to store express sessions in mongoDB
+//This file shows how to use sessions, all passwords are (dddddddd), first you need to install it with "npm install --save express-session" to use the sessions and "npm install --save connect-mongo" to save them in mongodb. connect-mongo allows you to store express sessions in mongoDB
 var express = require('express'),
     app = express(),
     path = require('path'),
