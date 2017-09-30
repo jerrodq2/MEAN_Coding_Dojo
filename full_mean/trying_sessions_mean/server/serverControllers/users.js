@@ -27,7 +27,7 @@ module.exports = {
         if (req.body.remembered) {
           req.session.cookie.expires = null
         } else {
-          req.session.cookie.maxAge = 60000
+          req.session.cookie.maxAge = 60000 //This is milliseconds, equal to one minute, 1000 milliseconds equals one second
         }
 
         console.log('Successfully registered')
@@ -72,7 +72,7 @@ module.exports = {
           if (req.body.remembered) {
             req.session.cookie.expires = null
           } else {
-            req.session.cookie.maxAge = 60000
+            req.session.cookie.maxAge = 60000 //This is milliseconds, equal to one minute, 1000 milliseconds equals one second
           }
           console.log("full session below:");
           console.log(req.session);
