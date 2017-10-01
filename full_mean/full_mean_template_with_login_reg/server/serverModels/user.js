@@ -1,5 +1,7 @@
 var mongoose = require('mongoose')
 var bcrypt = require('bcrypt')
+
+//Base User model template, change as necessary
 var UserSchema = new mongoose.Schema({
  first_name: {
    type: String,
