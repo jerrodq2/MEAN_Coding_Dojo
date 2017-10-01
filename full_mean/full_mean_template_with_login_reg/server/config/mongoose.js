@@ -3,7 +3,7 @@ var mongoose      = require('mongoose'),
     path          = require('path'),
     models_path   = path.join( __dirname, "../serverModels"),
     reg           = new RegExp( ".js$", "i" ),
-    dbURI         = 'mongodb://localhost/DB_name_here';
+    dbURI         = 'mongodb://localhost/DB_NAME_HERE';
 
 mongoose.Promise = global.Promise;
 mongoose.connect( dbURI, {
