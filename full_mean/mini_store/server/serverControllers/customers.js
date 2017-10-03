@@ -23,6 +23,7 @@ module.exports = {
       if(err){
         console.log(err)
       }
+      res.json({message: true})
     })
   },
 

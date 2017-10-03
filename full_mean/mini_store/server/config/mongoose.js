@@ -5,7 +5,10 @@ var mongoose      = require('mongoose'),
     reg           = new RegExp( ".js$", "i" ),
     dbURI         = 'mongodb://localhost/mini_store'
 
-mongoose.connect( dbURI )
+mongoose.Promise = global.Promise;
+mongoose.connect( dbURI, {
+  useMongoClient: true
+});
 
 mongoose.connection.on( 'connected', function () {
   console.log( `Mongoose default connection open to ${ dbURI }` )

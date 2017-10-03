@@ -1,7 +1,10 @@
 var app = angular.module('myApp', ['ngRoute'])
 
-app.config(function ($routeProvider) {
+app.config(['$locationProvider', function($locationProvider) {
+  $locationProvider.hashPrefix('');
+}]);
 
+app.config(function ($routeProvider) {
 $routeProvider
   .when('/dashboard', {
     templateUrl: 'partials/dashboard.html'

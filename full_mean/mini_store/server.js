@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     path = require('path'),
     bodyParser = require('body-parser')
-// mongoose.Promise = global.Promise;
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, './client')))

@@ -2,6 +2,7 @@
   <h3><a href="#/dashboard">Dashboard</a> | <a href="#/products">Products</a> | Orders | <a href="#/customers">Customers</a></h3>
   <h3>Add a new order</h3>
   {{oc.flash}}
+
   <form>
     Customer: <select ng-model='oc.newOrder.customer_name'>
       <option ng-repeat='customer in oc.customers' value={{customer.name}}>{{customer.name}}</option>
@@ -12,7 +13,9 @@
     </select>
     <input type="submit" ng-click='oc.create()' value="Order">
   </form>
+
   <input type="text" ng-model='search' placeholder="filter...">
+
   <table>
     <tr>
       <td>Customer Name</td><td>Product</td><td>Quantity</td><td>Date</td><td>Actions</td>
@@ -20,8 +23,18 @@
     <tr ng-show='oc.orders.length < 1'>
       <td> - </td><td> - </td><td> - </td><td> - </td><td> - </td>
     </tr>
-    <tr ng-repeat='order in oc.orders |filter: search'>
-      <td>{{order.customer_name}}</td><td>{{order.product_name}}</td><td>{{order.quantity}}</td><td>{{order.created_at}}</td><td><button ng-click='oc.delete(order._id)'>Delete</button><button><a href='#/editOrders/{{order._id}}'>Edit</a></button></td>
+    <tr ng-repeat='order in oc.orders |filter: search as filtered_results'>
+      <td>{{order.customer_name}}</td><td>{{order.product_name}}</td><td>{{order.quantity}}</td><td>{{order.createdAt}}</td><td><button ng-click='oc.delete(order._id)'>Delete</button><button><a href='#/editOrders/{{order._id}}'>Edit</a></button></td>
+    </tr>
+
+    <tr ng-show="filtered_results.length == 0">
+      <td>No results found</td>
+      <td> - </td>
+      <td> - </td>
+      <td> - </td>
+      <td> - </td>
     </tr>
   </table>
+
+
 </div>
