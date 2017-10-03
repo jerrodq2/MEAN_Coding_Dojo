@@ -22,6 +22,8 @@ app.controller('orderController', ['orderFactory', 'customerFactory', 'productFa
     })
     self.newOrder = {}
   }
+
+  
   this.delete = function(id){
     fact.delete(id, function(data){
 

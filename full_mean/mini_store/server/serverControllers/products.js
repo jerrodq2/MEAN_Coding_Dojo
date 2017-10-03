@@ -26,6 +26,7 @@ module.exports = {
         if(err){console.log(err)}
         Product.remove({_id: req.params.id}, function(err){
           if(err){console.log(err)}
+          res.json({message: true})
         })
       })
     })

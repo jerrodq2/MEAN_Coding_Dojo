@@ -14,9 +14,12 @@ app.controller('customerController', ['customerFactory', '$location', function(f
     })
   }
   this.delete = function(id){
-    fact.delete(id)
-    fact.find(function(data){
-      self.customers = data
+    fact.delete(id, function(){
+
+      fact.find(function(data){
+        self.customers = data
+      })
+      
     })
   }
 

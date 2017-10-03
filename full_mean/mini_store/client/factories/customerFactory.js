@@ -15,8 +15,10 @@ app.factory('customerFactory', ['$http', '$routeParams', '$location', function(h
       }
     })
   }
-  factory.delete = function(id){
-    http.get('/delete/customer/'+id)
+  factory.delete = function(id, callback){
+    http.get('/delete/customer/'+id).then(function(response){
+      callback()
+    })
   }
 
   return factory;

@@ -35,6 +35,8 @@ module.exports = {
       }
     })
   },
+
+
   delete: function(req, res){
     Order.findOne({_id: req.params.id}, function(err, order){
       //first, i'll update the product related to it so that the quantity is returned
@@ -53,6 +55,8 @@ module.exports = {
       })
     })
   },
+
+
   update: function(req, res){
     Order.findOne({_id: req.params.id}, function(err, order){
       // I have to act and update the product differently based on if the quantity they asked for went up or down
@@ -70,7 +74,9 @@ module.exports = {
             })
           })
         })
-      } else{
+      }
+
+      else{
         //the amoung they want increase and we have to make sure that there is enough of the product in stock to do this.
         var temp = req.body.quantity - order. quantity //this temp is what will be subtracted from the product, have to make sure there is enough of the product to do that first though
         Product.findOne({name: order.product_name}, function(err, product){
@@ -98,6 +104,9 @@ module.exports = {
       }
     })
   },
+
+
+  
   findOne: function(req, res){
     Order.findOne({_id: req.params.id}, function(err, result){
       return res.json(result)
