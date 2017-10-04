@@ -12,6 +12,8 @@ $routeProvider
   .when('/create', {
     templateUrl: 'partials/create.html'
   })
+
+  //Notice below how I use "/:id" this is an example of a route parameter, format as follows - ":param_name", you access it with routeParams as shown in the appointment Factory under the editOne method
   .when('/edit/:id', {
     templateUrl: 'partials/edit.html'
   })

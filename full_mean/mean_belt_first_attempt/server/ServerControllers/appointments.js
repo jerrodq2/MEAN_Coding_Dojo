@@ -63,11 +63,21 @@ module.exports = {
       }
     })
   },
+
+
+
+// *************************** EXAMPLE OF ROUTE PARAMETERS BELOW ***************************
+
+  //Notice below I do "req.params.id", this is how you access a route paramter in the server side. You use the first parameter below, usually "request" or "req", then ".params.param_name", so in this case, since I want to access the :id paramaeter in the url, I do "req.params.id"
   edit: function(req, res){
     App.findOne({_id: req.params.id}, function(err, result){
       res.json(result);
     })
   },
+
+
+
+
   update: function(req, res){
     //first i'm checking to see if the user id in the cookie matches the one with said appointment, so that if they tamper with the client side, they can't start deleting and editing whatever they want, I have a similar check on delete
     if(req.body.complain.length < 10 || req.body.complain.length > 40){

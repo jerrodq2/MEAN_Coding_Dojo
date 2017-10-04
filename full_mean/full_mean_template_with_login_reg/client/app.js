@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'ngCookies']) //add other depedent modules here
+var app = angular.module('myApp', ['ngRoute', 'ngCookies']) // add/remove other depedent modules here
 
 app.config(['$locationProvider', function($locationProvider) {
   $locationProvider.hashPrefix('');
