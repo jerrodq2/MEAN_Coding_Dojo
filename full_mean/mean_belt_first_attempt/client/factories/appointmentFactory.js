@@ -47,11 +47,26 @@ app.factory('appointmentFactory', ['$location', '$http', '$routeParams', '$cooki
       callback(response.data.message);
     })
   }
+
+
+// **************************** ROUTE PARAMETERS EXAMPLE BELOW *********************************
+
+
   factory.editOne = function(callback){
+    //Notice below I use "routeP.id" or "$routeParams.id", the route for the partail that triggers this is "/edit/:id", by using the service $routeParams. If I logged $routeParams, it would look like: {id: "59cbd11929326749fb0cb8d0"}, every parameter is a key, so that's how we access it and send it as part of an http request. Next see routes.js to see the server side of it.
     http.get('/appointments/edit/'+ routeP.id ).then(function(response){
       callback(response.data);
     })
   }
+
+
+
+
+
+
+
+
+
   factory.update = function(aid, data, callback){
     if(angular.isUndefined(data)){
       callback('All fields must be completed');
