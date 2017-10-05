@@ -26,7 +26,7 @@
         <td><a href="#/topics/{{t._id}}">{{t.title}}</a></td>
         <td>{{t.user_id.username}}</td>
         <td>{{t.comments.length}}</td>
-        <td ng-show="topic.id == t.user_id._id">DELETE</td>
+        <td ng-show="topic.id == t.user_id._id"><a ng-click="topic.delete(t._id)">DELETE</a></td>
         <td ng-hide="topic.id == t.user_id._id"> - </td>
       </tr>
 

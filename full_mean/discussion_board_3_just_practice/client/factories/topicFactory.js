@@ -41,8 +41,44 @@ app.factory('topicFactory', ['$http', '$routeParams', '$location','$cookies', fu
         location.url('/main')
       }
     })
+  }
 
 
+  factory.delete = function(id, callback){
+    http.get('/topics/' + id + '/destroy').then(function(response){
+      callback(response.data.topics)
+    })
+  }
+
+
+  factory.findOne = function(callback){
+    http.get('/topics/'+routeP.id).then(function(response){
+      callback(response.data)
+    })
+  }
+
+
+  factory.create_comment = function(data, callback){
+    if(angular.isUndefined(data)){
+      return callback(false, "Comment can't be blank")
+    } else if (angular.isUndefined(data.comment) || data.comment.length < 1){
+      return callback(false, "Comment can't be blank")
+    }
+    data.topic_id = routeP.id
+    http.post('/comments', data).then(function(response){
+      if(!response.data.message){
+        callback(false, response.data.str)
+      } else {
+        callback(true, response.data.topic)
+      }
+    })
+  }
+
+
+  factory.like = function(id, callback){
+    http.get('/likes/'+ id + '/' + routeP.id).then(function(response){
+      callback(response.data)
+    })
   }
 
 
