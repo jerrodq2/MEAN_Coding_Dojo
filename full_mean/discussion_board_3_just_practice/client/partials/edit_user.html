@@ -1,0 +1,38 @@
+<div ng-controller="editUserController as edit">
+  <h1>Edit for: {{edit.username}}</h1>
+  <a href="#/main">Back to main page</a>
+  <br><br>
+  <button ng-click='edit.logout()'>Logout</button>
+  {{edit.edit_flash}}
+  <br>
+
+  <h4>Edit Your Info</h4>
+  <form>
+    <label for="username">Username: </label>
+    <input type="text" ng-model="edit.user.username" id="username">
+
+    <label for="email">Email: </label>
+    <input type="email" ng-model="edit.user.email" id="email">
+
+    <input type="submit" ng-click="edit.edit_user()" value="Edit Your Info">
+  </form>
+
+
+  <hr>
+  <br>
+  <h4>Edit Your Password</h4>
+  {{edit.pass_flash}}
+  <form>
+    <label for="old">Enter Old Password:</label>
+    <input type="password" ng-model="edit.change_pass.old_password" id="old">
+
+    <label for="new">Enter New Password</label>
+    <input type="password" ng-model="edit.change_pass.password" id="new">
+
+    <label for="confirm">Confirm New Password</label>
+    <input type="password" ng-model="edit.change_pass.confirm" id="confirm">
+
+    <input type="submit" ng-click="edit.edit_pass()" value="Change Password">
+  </form>
+
+</div>

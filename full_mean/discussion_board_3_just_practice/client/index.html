@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Delete the two stylesheets below if you're not using bootstrap -->
+    <link rel="stylesheet" href="static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap/bootstrap-theme.min.css">
+    <!-- END OF STYLESHEETS -->
+
+    <script src="angular/angular.js" charset="utf-8"></script>
+    <script src="angular-route/angular-route.js" charset="utf-8"></script>
+    <script src = 'angular-cookies/angular-cookies.js'></script>
+    <!-- END OF BOWER COMPONENTS -->
+
+    <script src="app.js" charset="utf-8"></script>
+    <script src='./factories/loginRegFactory.js' charset="utf-8"></script>
+    <script src='./factories/topicFactory.js' charset="utf-8"></script>
+    <script src='./factories/editUserFactory.js' charset="utf-8"></script>
+    <!-- end of factories -->
+    <script src="./controllers/loginRegController.js" charset="utf-8"></script>
+    <script src="./controllers/topicController.js" charset="utf-8"></script>
+    <script src="./controllers/editUserController.js" charset="utf-8"></script>
+    <!-- end of controllers -->
+    <!-- END OF ANGULAR FILES -->
+  </head>
+
+
+  <body class="container-fluid" ng-view="">
+
+
+
+  <!-- Delete the two scripts below if you're not using bootstrap -->
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
