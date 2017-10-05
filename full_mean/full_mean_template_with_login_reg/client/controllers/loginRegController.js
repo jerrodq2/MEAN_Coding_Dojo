@@ -1,4 +1,4 @@
-app.controller('loginRegController', ['loginRegFactory', function(fact){
+app.controller('loginRegController', ['loginRegFactory', '$cookies', function(fact, cookies){
   var self = this
 
   this.register = function(){

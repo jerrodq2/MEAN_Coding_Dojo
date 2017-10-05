@@ -2,21 +2,41 @@
   <h1>Register</h1>
   {{lrc.regFlash}}
   <form>
-    First Name: <input type="text" ng-model='lrc.reg.first_name'>
-    Last Name: <input type="text" ng-model='lrc.reg.last_name'>
-    Email: <input type="email" ng-model='lrc.reg.email'>
-    Password: <input type="password" ng-model='lrc.reg.password'>
-    Cofirm Password: <input type="password" ng-model='lrc.reg.confirm'>
-    Remember Me: <input type="checkbox" ng-model="lrc.reg.remembered">
+    <label for="first_name">First Name: </label>
+    <input type="text" ng-model='lrc.reg.first_name' id="first_name">
+
+    <label for="last_name">Last Name: </label>
+    <input type="text" ng-model='lrc.reg.last_name' id="last_name">
+
+    <label for="email">Email: </label>
+    <input type="email" ng-model='lrc.reg.email' id="email">
+
+    <label for="password">Password: </label>
+    <input type="password" ng-model='lrc.reg.password' id="password">
+
+    <label for="confirm">Confirm Password: </label>
+    <input type="password" ng-model='lrc.reg.confirm' id="confirm">
+
+    <label for="remembered">Remember Me: </label>
+    <input type="checkbox" ng-model="lrc.reg.remembered" id="remembered">
+
     <input type="submit" ng-click='lrc.register()' value="Register">
   </form>
   <hr>
+
+
   <h1>Login</h1>
   {{lrc.loginFlash}}
   <form>
-    Email: <input type="text" ng-model='lrc.log.email'>
-    Password: <input type="password" ng-model='lrc.log.password'>
-    Remember Me: <input type="checkbox" ng-model="lrc.log.remembered">
+    <label for="email">Email: </label>
+    <input type="text" ng-model='lrc.log.email' id="email">
+
+    <label for="password">Password: </label>
+    <input type="password" ng-model='lrc.log.password' id="password">
+
+    <label for="remembered">Remember Me: </label>
+    <input type="checkbox" ng-model="lrc.log.remembered" id="remembered">
+
     <input type="submit" ng-click='lrc.login()' value="Login">
   </form>
 </div>
