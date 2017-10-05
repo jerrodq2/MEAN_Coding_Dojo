@@ -1,8 +1,8 @@
-app.controller('topicController', ['topicFactory', '$location', '$cookies', function(topic, location, cookie){
+app.controller('topicController', ['topicFactory', '$location', '$cookies', function(topic, location, cookies){
   var self = this;
   this.main_flash = ''
-  this.username = cookie.get('discussion_board_3_username')
-  this.id = cookie.get('discussion_board_3_id')
+  this.username = cookies.get('discussion_board_3_username')
+  this.id = cookies.get('discussion_board_3_id')
 
   this.logout = function(){
     topic.logout()
@@ -17,6 +17,15 @@ app.controller('topicController', ['topicFactory', '$location', '$cookies', func
       self.main_flash = response
     })
   }
+
+
+  this.delete = function(id){
+    topic.delete(id, function(response){
+      self.topics = response
+    })
+  }
+
+
 
 
 

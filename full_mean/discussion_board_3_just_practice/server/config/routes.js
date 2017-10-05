@@ -12,7 +12,12 @@ module.exports = function(app){
   app.post('/users/:id/update_password', Users.update_password)
 
   app.get('/topics', Topics.find)
+  app.get('/topics/:id', Topics.findOne)
+  app.get('/topics/:id/destroy', Topics.delete)
+  app.get('/likes/:id/:topic_id', Topics.like)
   app.post('/topics', Topics.create)
+  app.post('/comments', Topics.comment_create)
+
 }
 
 // *******************End*******************

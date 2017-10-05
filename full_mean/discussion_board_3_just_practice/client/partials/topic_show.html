@@ -1,0 +1,29 @@
+<div ng-controller="topicShowAndCommentController as topic">
+  <h1>{{topic.topic.title}}</h1>
+  <h5>Created by: {{topic.topic.user_id.username}}</h5>
+  <h3>Description: {{topic.topic.description}}</h3>
+  <a href="#/main">Back Home</a> <br>
+  <button ng-click='topic.logout()'>Logout</button>
+  <br><br><br>
+
+
+  <h4>Create a new comment</h4>
+  {{topic.comment_flash}}
+  <form>
+    <label for="comment"></label>
+    <input type="text" ng-model="topic.new_comment.comment"  id="comment">
+
+    <input type="submit" ng-click="topic.create_comment()" value="Create new comment">
+  </form>
+
+
+  <br><br><br>
+  <h3>Comments:</h3>
+  <p>*these comments may not make sense because I had them ordered by likes for pracice, so they're not in the order they were created</p>
+  <p ng-show="topic.topic.comments.length == 0"> No comments</p>
+  <ul ng-repeat="comment in topic.topic.comments | orderBy: '-likes'">
+    <li>{{comment.user_id.username}} Wrote: {{comment.comment}}
+      <br>Likes: <button type="button" ng-click="topic.like(comment._id)">{{comment.likes}}</button>
+    </li>
+  </ul>
+</div>
