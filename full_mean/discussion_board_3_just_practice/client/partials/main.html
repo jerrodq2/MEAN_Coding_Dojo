@@ -1,0 +1,42 @@
+<div ng-controller="topicController as topic">
+  <h1>User: {{topic.username}}</h1>
+  <h4><a href="#/users/{{topic.id}}" + >See Your profile</a></h4>
+
+  <table>
+    <thead>
+      <th>Category</th>
+      <th>Title</th>
+      <th>Created By</th>
+      <th>Number of Posts</th>
+      <th>Actions</th>
+    </thead>
+
+    <tbody>
+
+      <tr ng-show="topic.topics.length == 0">
+        <td> - </td>
+        <td> - </td>
+        <td> - </td>
+        <td> - </td>
+        <td> - </td>
+      </tr>
+
+      <tr ng-repeat="t in topic.topics">
+        <td>{{t.category}}</td>
+        <td><a href="#/topics/{{t._id}}">{{t.title}}</a></td>
+        <td>{{t.user_id.username}}</td>
+        <td>{{t.comments.length}}</td>
+        <td ng-show="topic.id == t.user_id._id">DELETE</td>
+        <td ng-hide="topic.id == t.user_id._id"> - </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <a href="#/topics/new">Create a new Topic</a>
+  <br>
+  <br>
+  <br>
+  <button ng-click='topic.logout()'>Logout</button>
+</div>
