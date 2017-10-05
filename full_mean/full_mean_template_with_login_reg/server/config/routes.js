@@ -1,10 +1,10 @@
-
-
 var Users = require('../serverControllers/users.js')
 // ex: var quotes = require('../controllers/quotes.js')
 
+
+
 module.exports = function(app){
-  app.post('/register', Users.register)
+  app.post('/users', Users.create)
   app.post('/login', Users.login)
   app.get('/logout', Users.logout)
 }

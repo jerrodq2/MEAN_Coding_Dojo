@@ -1,4 +1,4 @@
-app.controller('exampleController', ['Factory', '$location', function(fact, location){
+app.controller('exampleController', ['Factory', '$location', '$cookies', function(fact, location, cookies){
   var self = this;
 
 

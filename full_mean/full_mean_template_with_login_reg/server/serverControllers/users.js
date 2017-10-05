@@ -3,7 +3,7 @@ var User = mongoose.model('User')
 
 //Basic controller for login/register functions, session stuff at the bottom.
 module.exports = {
-  register: function(req, res){
+  create: function(req, res){
     var user = new User(req.body)
     user.save(function(err){
       if(err){
@@ -11,6 +11,13 @@ module.exports = {
         res.json({message: false, str: 'Email already in database, please log in'})
       } else{
         console.log('Successfully registered')
+        //The code below is for creating a session and setting the expiration date of it
+        req.session.user = {username: user.username, email: user.email, _id: user._id}
+        if (req.body.remembered) {
+          req.session.cookie.expires = null
+        } else {
+          req.session.cookie.maxAge = 7200000 //This is milliseconds, equal to two hours, 1000 milliseconds equals one second
+        }
         res.json({message: true, id: user._id})
       }
     })
@@ -29,7 +36,15 @@ module.exports = {
         var check = result.validPassword(req.body.password)
         if(check){
           console.log('good login')
+          //The code below is for creating a session and setting the expiration date of it
+          req.session.user = {username: user.username, email: user.email, _id: user._id}
+          if (req.body.remembered) {
+            req.session.cookie.expires = null
+          } else {
+            req.session.cookie.maxAge = 7200000 //This is milliseconds, equal to two hours, 1000 milliseconds equals one second
+          }
           res.json({message: true, id: result._id})
+
         } else{
           console.log('unsuccessful login, incorrect password')
           res.json({message: false, str: 'Password is incorrect'})
@@ -38,11 +53,13 @@ module.exports = {
     })
   },
 
+
+
   logout: function(req, res){
-  // req.session.destroy()
+  req.session.destroy()
   //the above code is optional, used to delete sessions
   res.json({message: true})
-},
+  },
 
 
 }// end of controller

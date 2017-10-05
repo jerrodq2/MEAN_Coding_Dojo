@@ -8,10 +8,10 @@ app.config(['$locationProvider', function($locationProvider) {
 app.config(function ($routeProvider) {
 
 $routeProvider
-  .when('/welcome', {
+  .when('/', {
     templateUrl: 'partials/loginReg.html'
   })
-  .when('/', {
+  .when('/main', {
     templateUrl: 'partials/users.html'
   })
   .otherwise('/');

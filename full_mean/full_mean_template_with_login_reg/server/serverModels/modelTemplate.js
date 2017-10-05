@@ -1,4 +1,5 @@
 var mongoose = require('mongoose')
+var Schema = mongoose.Schema; //used in associations when specifying the type
 
 var ModelSchema = new mongoose.Schema({
   data:{

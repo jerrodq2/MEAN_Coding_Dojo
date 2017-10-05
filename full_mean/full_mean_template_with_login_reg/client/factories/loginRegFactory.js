@@ -1,8 +1,9 @@
 app.factory('loginRegFactory', ['$http', '$routeParams', '$location','$cookies', function(http, routeP, location, cookie){
   var factory = {};
 
+  //You should change the name of this and the other cookies, the name is how the browser identifies it, so if another project created a cookie named "id", then it would be seen in the if statement below, but not if I changed the below code to something like "cookie.get('project_name_id')"
   if(cookie.get('id')){
-    location.url('/')
+    location.url('/main')
   }
 
   factory.register = function(data, callback){
@@ -32,7 +33,7 @@ app.factory('loginRegFactory', ['$http', '$routeParams', '$location','$cookies',
     }
     //end of register validations
 
-    http.post('/register', data).then(function(response){
+    http.post('/users', data).then(function(response){
       if(!response.data.message){
         callback(response.data.str)
       } else{
@@ -43,12 +44,12 @@ app.factory('loginRegFactory', ['$http', '$routeParams', '$location','$cookies',
         } else {
           var today = new Date()
           var date_to_expire = new Date(today)
-          date_to_expire.setSeconds(today.getSeconds()+60) //You can change this amount and/or date method
+          date_to_expire.setHours(today.getHours() + 2) //They'll stay logged in for 2 hours
           cookie.put('id', response.data.id, {'expires': date_to_expire})
         }
 
         callback('')
-        location.url('/')
+        location.url('/main')
       }
     })
   }
@@ -78,12 +79,12 @@ app.factory('loginRegFactory', ['$http', '$routeParams', '$location','$cookies',
         } else {
           var today = new Date()
           var date_to_expire = new Date(today)
-          date_to_expire.setSeconds(today.getSeconds()+60) //You can change this amount and/or date method
+          date_to_expire.setHours(today.getHours() + 2) //They'll stay logged in for 2 hours
           cookie.put('id', response.data.id, {'expires': date_to_expire})
         }
 
         callback('')
-        location.url('/')
+        location.url('/main')
       }
     })
   }
@@ -92,7 +93,7 @@ app.factory('loginRegFactory', ['$http', '$routeParams', '$location','$cookies',
   factory.logout = function(){
     http.get('/logout').then(function(response){
       cookie.remove('id')
-      location.url('/welcome')
+      location.url('/')
     })
   }
 
